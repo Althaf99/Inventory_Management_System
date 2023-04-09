@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f9424de8.css",
+    "main.js": "/static/js/main.59e146bf.js",
+    "static/media/comfortaa-all-400-normal.woff": "/static/media/comfortaa-all-400-normal.ebe591443239fbeb9f99.woff",
+    "static/media/comfortaa-latin-400-normal.woff2": "/static/media/comfortaa-latin-400-normal.04d2b9164d14183439c9.woff2",
+    "static/media/comfortaa-latin-ext-400-normal.woff2": "/static/media/comfortaa-latin-ext-400-normal.d26f13e8cb35bb106581.woff2",
+    "static/media/comfortaa-cyrillic-400-normal.woff2": "/static/media/comfortaa-cyrillic-400-normal.411fd97469df651d89e0.woff2",
+    "static/media/comfortaa-cyrillic-ext-400-normal.woff2": "/static/media/comfortaa-cyrillic-ext-400-normal.e99d76f2095c91141872.woff2",
+    "static/media/comfortaa-greek-400-normal.woff2": "/static/media/comfortaa-greek-400-normal.a353f1e1a3f6e1c004f4.woff2",
+    "static/media/comfortaa-vietnamese-400-normal.woff2": "/static/media/comfortaa-vietnamese-400-normal.aafda8802197bf5965b0.woff2",
+    "index.html": "/index.html",
+    "main.f9424de8.css.map": "/static/css/main.f9424de8.css.map",
+    "main.59e146bf.js.map": "/static/js/main.59e146bf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f9424de8.css",
+    "static/js/main.59e146bf.js"
+  ]
+}
