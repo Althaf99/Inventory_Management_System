@@ -1,144 +1,151 @@
-import React, { useMemo, useState } from "react";
+import React from "react";
 
 import Grid from "@material-ui/core/Grid";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
-import Button from "@material-ui/core/Button";
+import { Button } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { Edit, Delete } from "@mui/icons-material";
 
-import DataTable from "../../components/ReactTable";
-import TablePopUp from "../../components/TablePopUp";
+import { IconButton } from "@mui/material";
+import LazyLoadingTable from "../../components/LazyLoadingTable";
 
-import styles from "./styles";
+import { styles } from "./styles";
+
+const columns = [
+  {
+    Header: "ID",
+    accessor: "id",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
+    Header: "Item",
+    accessor: "item",
+    width: "25",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
+    Header: "Quantity",
+    accessor: "Quantity",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+    width: "25",
+  },
+  {
+    Header: "Rate",
+    accessor: "rate",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+    width: "25",
+  },
+  {
+    Header: "Balance",
+    accessor: "balance",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+    width: "25",
+  },
+  {
+    Header: "ItemCode",
+    accessor: "itemCode",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
+    Header: "Status",
+    accessor: "status",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
+    Header: "Actions",
+    Cell: ({ row }) => (
+      <>
+        <IconButton onClick={() => console.log("")}>
+          <Edit />
+        </IconButton>
+        <IconButton onClick={() => console.log("")}>
+          <Delete />
+        </IconButton>
+      </>
+    ),
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+];
+
+const data = [
+  {
+    id: "1",
+    item: "1040 Handle",
+    rate: "100",
+    Quantity: "250",
+    status: "completed",
+  },
+  {
+    id: "2",
+    item: "1040 Handle",
+    rate: "100",
+    status: "completed",
+    Quantity: "250",
+  },
+  {
+    id: "3",
+    item: "1040 Handle",
+    rate: "100",
+    status: "Incompleted",
+    Quantity: "250",
+  },
+  {
+    id: "4",
+    item: "1040 Handle",
+    rate: "100",
+    status: "completed",
+    Quantity: "250",
+  },
+  {
+    id: "5",
+    item: "1040 Handle",
+    rate: "100",
+    status: "Incompleted",
+    Quantity: "250",
+  },
+];
 
 const Home = () => {
   const classes = styles();
-  const [open, setOpen] = useState(false);
-
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  }));
-
-  const columns = useMemo(
-    () => [
-      {
-        Header: "Id",
-        accessor: "id",
-      },
-      {
-        Header: "item",
-        accessor: "item",
-        width: "15%",
-      },
-      {
-        Header: "color",
-        accessor: "color",
-        width: "15%",
-      },
-      {
-        Header: "qty",
-        accessor: "qty",
-        width: "15%",
-      },
-      {
-        Header: "rate",
-        accessor: "rate",
-        width: "15",
-      },
-      {
-        Header: "amount",
-        accessor: "amount",
-        width: "15",
-      },
-    ],
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [classes.iconRoot]
-  );
-
-  const namedUser = [
-    {
-      id: 1,
-      item: "1040 Handle",
-      color: "Black",
-      qty: 5000,
-      rate: 27.3,
-      amount: "Total Amount",
-    },
-    {
-      id: 1,
-      item: "1040 Handle",
-      color: "Black",
-      qty: 5000,
-      rate: 27.3,
-      amount: "Total Amount",
-    },
-    {
-      id: 1,
-      item: "1040 Handle",
-      color: "Black",
-      qty: 5000,
-      rate: 27.3,
-      amount: "Total Amount",
-    },
-    {
-      id: 1,
-      item: "1040 Handle",
-      color: "Black",
-      qty: 5000,
-      rate: 27.3,
-      amount: "Total Amount",
-    },
-  ];
-  const onClickTableRow = () => {};
-  const openTablePopUp = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <>
-      <Grid container alignContent="flex-start">
-        <Grid
-          item
-          container
-          justify="space-between"
-          style={{ paddingBottom: "20px" }}
-        >
-          <div className={classes.headingTitle}>{"P/O Request"}</div>
-          <Button
-            id="btn-create-app"
-            endIcon={<AddCircleOutlineIcon />}
-            classes={{ root: classes.btn }}
-            onClick={() => {
-              openTablePopUp();
-            }}
-          >
-            {"Add Data"}
-          </Button>
-        </Grid>
-
-        <Grid item className={classes.tableContainer}>
-          <Grid container spacing={2} className={classes.gridContainer}>
-            <Grid item xs={8}>
-              <Grid item className={classes.tableContainer}>
-                <DataTable
-                  data={namedUser}
-                  columns={columns}
-                  hiddenColumns={["id"]}
-                  onClickTableRow={onClickTableRow}
-                />
-              </Grid>
-            </Grid>
+      <Grid
+        item
+        container
+        alignContent="flex-start"
+        className={classes.section}
+      >
+        <Grid container justifyContent="space-between" className={classes.top}>
+          <Grid item className={classes.heading}>
+            Purchase Order
+          </Grid>
+          <Grid item>
+            <Button
+              startIcon={<AddCircleOutlineIcon />}
+              classes={{ root: classes.btn }}
+              onClick={() => {}}
+            >
+              New Stock
+            </Button>
           </Grid>
         </Grid>
-        <TablePopUp open={open} handleClose={handleClose} />
+        <Grid item className={classes.table} xs={12}>
+          <LazyLoadingTable
+            columns={columns}
+            data={data}
+            hiddenColumns={["itemCode", "id"]}
+            fontSize="24px"
+            color="#FFFFFF"
+          />
+        </Grid>
       </Grid>
     </>
   );

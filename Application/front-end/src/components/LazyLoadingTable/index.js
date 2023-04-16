@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { useTable } from 'react-table';
-import memoize from 'memoize-one';
+import InfiniteScroll from "react-infinite-scroll-component";
+import { useTable } from "react-table";
+import memoize from "memoize-one";
 import {
   Table,
   TableHead,
   TableBody,
   TableRow,
   TableCell,
-} from '@mui/material';
-import { StyledEngineProvider } from '@mui/material/styles';
+} from "@mui/material";
+import { StyledEngineProvider } from "@mui/material/styles";
 
-import Row from './TableRow';
-import { useStyles } from './styles';
-import { generateRowKey } from './helpers';
+import Row from "./TableRow";
+import { useStyles } from "./styles";
+import { generateRowKey } from "./helpers";
 
 const LazyLoadingTable = ({
   hiddenColumns,
@@ -81,11 +81,11 @@ const LazyLoadingTable = ({
                     {...column.getHeaderProps()}
                     className={classes.head}
                     style={{
-                      width: column.render('width'),
+                      width: column.render("width"),
                       ...column?.headerStyles,
                     }}
                   >
-                    {column.render('Header')}
+                    {column.render("Header")}
                   </TableCell>
                 ))}
               </TableRow>

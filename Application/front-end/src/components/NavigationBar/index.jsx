@@ -5,40 +5,20 @@ import CssBaseline from "@mui/material/CssBaseline";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
-  navlinks: {
-    marginLeft: theme.spacing(10),
-    display: "flex",
-    textDecoration: "none",
-    height: "20px",
-  },
-  logo: {
-    flexGrow: "1",
-    cursor: "pointer",
-  },
-  link: {
-    textDecoration: "none",
-    color: "white",
-    fontSize: "20px",
-    marginLeft: theme.spacing(15),
-    "&:hover": {
-      color: "black",
-    },
-  },
-}));
+import { styles } from "./styles";
 
 const NavigationBar = () => {
-  const classes = useStyles();
+  const classes = styles();
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="sticky">
         <CssBaseline />
         <Toolbar>
-          <Typography variant="h4" className={classes.logo}>
-            Navbar
+          <Typography className={classes.logo}>
+            Fujicraft Inventory Management System
           </Typography>
           <div className={classes.navlinks}>
             <Link to="/Home" className={classes.link}>
@@ -53,7 +33,9 @@ const NavigationBar = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <Outlet />
+      <Grid className={classes.children}>
+        <Outlet />
+      </Grid>
     </>
   );
 };
