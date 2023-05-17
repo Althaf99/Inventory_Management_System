@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "react-query";
 import axios from "axios";
 
-const useCreatePost = () => {
+const useCreateRequest = () => {
   const QueryClient = useQueryClient();
-  const projectUrl = "http://localhost:3000/api/v1/PORequests";
+  const projectUrl = "http://localhost:8080/purchaseOrder";
 
   return useMutation(
-    (obj) => axios.post(projectUrl, JSON.stringify(obj)).then((x) => x.json()),
+    async (obj) => await axios.post(projectUrl, obj),
     {
       onSuccess: async () => {
         QueryClient.invalidateQueries();
@@ -20,4 +20,4 @@ const useCreatePost = () => {
   );
 };
 
-export default useCreatePost;
+export default useCreateRequest;

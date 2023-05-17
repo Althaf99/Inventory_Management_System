@@ -1,16 +1,18 @@
-import React from 'react';
+import React from "react";
 
-import { TableRow, TableCell } from '@mui/material';
+import { TableRow, TableCell } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-import { useStyles } from '../styles';
-import useHover from '../../../hooks/useHover';
+import styles from "../styles";
+import useHover from "../../../hooks/useHover";
 
 const Row = ({
   index,
   style,
   data: { prepareRow, items, selectedId, handleRowClick, textWrap },
 }) => {
-  const classes = useStyles();
+  const theme = useTheme();
+  const classes = styles(theme);
 
   const [hoverRef, isHovered] = useHover();
 
@@ -22,7 +24,7 @@ const Row = ({
       id={index}
       style={style}
       ref={hoverRef}
-      className={classes.row}
+      sx={classes.row}
       hover
       selected={selectedId === index}
       {...row.getRowProps()}
@@ -38,14 +40,12 @@ const Row = ({
             component="td"
             scope="row"
             {...cell.getCellProps()}
-            classes={{
-              root: row.values.isDeleted ? classes.cellDeleted : classes.cell,
-            }}
-            className={
-              textWrap ? classes.textTruncateTextWrap : classes.textTruncate
-            }
+            sx={[
+              textWrap ? classes.textTruncateTextWrap : classes.textTruncate,
+              row.values.isDeleted ? classes.cellDeleted : classes.cell,
+            ]}
           >
-            {cell.render('Cell', { isHovered })}
+            {cell.render("Cell", { isHovered })}
           </TableCell>
         );
       })}

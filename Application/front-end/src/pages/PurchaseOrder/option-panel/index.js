@@ -7,7 +7,7 @@ import LabeledChip from "../../../components/LabeledChip";
 import EditIcon from "../../../components/EditIcon";
 import DeleteIcon from "../../../components/DeleteIcon";
 
-import styles from "../styles";
+import { styles } from "../ListPurchaseOrder/styles";
 
 const OptionPanel = ({ values, isDeleted }) => {
   const classes = styles();

@@ -4,7 +4,10 @@ import { createBrowserRouter } from "react-router-dom";
 import NavigationBar from "../NavigationBar";
 import Home from "../../pages/Home";
 import Dashboard from "../../pages/Dashboard";
-import PurchaseOrder from "../../pages/PO";
+import ListPurchaseOrder from "../../pages/PurchaseOrder/ListPurchaseOrder";
+import ManageRequest from "../../pages/PurchaseOrder/ManageRequest";
+import ListInvoice from "../../pages/Invoice/List-Invoice";
+import ManageInvoice from "../../pages/Invoice/Manage-Invoice";
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -22,7 +25,19 @@ const AppRouter = () => {
         },
         {
           path: "PurchaseOrder",
-          element: <PurchaseOrder />,
+          element: <ListPurchaseOrder />,
+        },
+        {
+          path: "PurchaseOrder/Create",
+          element: <ManageRequest />,
+        },
+        {
+          path: "Invoice",
+          element: <ListInvoice />,
+        },
+        {
+          path: "Invoice/Create",
+          element: <ManageInvoice />,
         },
       ],
     },

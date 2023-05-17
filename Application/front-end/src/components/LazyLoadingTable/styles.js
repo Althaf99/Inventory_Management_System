@@ -1,49 +1,66 @@
-import { makeStyles } from "@mui/styles";
+import { css } from "@emotion/react";
 
-export const useStyles = makeStyles({
-  head: (props) => ({
-    borderBottom: "0px",
-    fontFamily: "Nunito",
-    fontStyle: "normal",
-    fontWeight: "bold",
-    fontSize: props.fontSize ? props.fontSize : "16px",
-    lineHeight: "22px",
-    color: props.color ? props.color : "#808CA3",
-  }),
-  row: {
-    boxShadow: "0px 1px 8px rgba(20, 46, 110, 0.1)",
-    borderRadius: "10px",
-    height: "50px !important",
-  },
-  cell: (props) => ({
-    fontFamily: "Nunito",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: "14px",
-    lineHeight: "18px",
-    color: props.cellColor ? props.cellColor : "#001847",
-  }),
-  cellDeleted: {
-    fontFamily: "Nunito",
-    fontStyle: "normal",
-    fontWeight: "normal",
-    fontSize: "14px",
-    lineHeight: "18px",
-    color: "#878787",
-  },
-  textTruncate: {
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    "&:last-child": {
-      textAlign: "right",
+const styles = () => {
+  const head = css`
+    border-bottom: 0px;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 19px;
+    line-height: 22px;
+    color: #2596be;
+    margin-bottom: 10px;
+  `;
+
+  const row = css`
+    box-shadow: 0px 1px 8px rgba(20, 46, 110, 0.1);
+    border-radius: 10px;
+    height: 50px !important;
+  `;
+
+  const cell = css`
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 18px;
+    color: #283032;
+  `;
+
+  const cellDeleted = css`
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 18px;
+    color: #878787;
+  `;
+
+  const textTruncate = css`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:last-child {
+      text-align: right;
     },
-  },
-  textTruncateTextWrap: {
-    overflow: "hidden",
-    textOverflow: "ellipsis",
-    "&:last-child": {
-      textAlign: "right",
+  `;
+
+  const textTruncateTextWrap = css`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    &:last-child {
+      text-align: right;
     },
-  },
-});
+  `;
+
+  return {
+    head,
+    row,
+    cell,
+    cellDeleted,
+    textTruncate,
+    textTruncateTextWrap,
+  };
+};
+
+export default styles;

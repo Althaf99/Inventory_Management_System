@@ -10,10 +10,10 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
-import { StyledEngineProvider } from "@mui/material/styles";
+import { StyledEngineProvider, useTheme } from "@mui/material/styles";
 
 import Row from "./TableRow";
-import { useStyles } from "./styles";
+import styles from "./styles";
 import { generateRowKey } from "./helpers";
 
 const LazyLoadingTable = ({
@@ -30,7 +30,8 @@ const LazyLoadingTable = ({
 }) => {
   const DEFAULT_HEIGHT = 500;
 
-  const classes = useStyles(props);
+  const theme = useTheme();
+  const classes = styles(theme);
 
   const [selectedId, setSelectedId] = useState(false);
 
@@ -79,7 +80,7 @@ const LazyLoadingTable = ({
                 {headerGroup.headers.map((column) => (
                   <TableCell
                     {...column.getHeaderProps()}
-                    className={classes.head}
+                    sx={classes.head}
                     style={{
                       width: column.render("width"),
                       ...column?.headerStyles,
@@ -93,7 +94,12 @@ const LazyLoadingTable = ({
           </TableHead>
           <TableBody {...getTableBodyProps()}>
             {data.map((item, index) => (
-              <Row index={index} data={itemData} key={generateRowKey(item)} />
+              <Row
+                sx={classes.rows}
+                index={index}
+                data={itemData}
+                key={generateRowKey(item)}
+              />
             ))}
           </TableBody>
         </Table>
