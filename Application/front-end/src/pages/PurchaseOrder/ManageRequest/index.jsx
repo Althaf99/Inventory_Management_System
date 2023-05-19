@@ -19,6 +19,7 @@ import useRequestNumbers from "../../../hooks/services/useRequestNumbers";
 const ManageRequest = () => {
   const classes = styles();
   const [obj, setObj] = useState({});
+  const [item, setItem] = useState();
 
   const { data: commonData } = useCommon();
   const { data: itemColors } = useColors();
@@ -61,7 +62,9 @@ const ManageRequest = () => {
       unitPrice: "",
     },
     onSubmit: async (values) => {
-      createRequest(obj);
+      formik.setFieldValue("itemColor", "");
+      formik.setFieldValue("quantity", "");
+      await createRequest(obj);
     },
   });
 
@@ -173,7 +176,7 @@ const ManageRequest = () => {
                       formik.setFieldValue("itemColor", value)
                     }
                     value={formik.values.itemColor}
-                    items={itemColorsArray && itemColorsArray}
+                    items={itemColorsArray}
                   />
                 </FormControl>
               </Grid>

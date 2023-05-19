@@ -41,6 +41,7 @@ const LabeledChip = ({
         style={{
           backgroundColor: backgroundColor ? backgroundColor : "#B5BDE9",
           height: height ? height : "",
+          marginLeft: "30px",
         }}
         icon={
           infoIcon === true ? (
