@@ -2,12 +2,12 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const styles = makeStyles((theme) => ({
   container: {
-    flexDirection: "column",
+    flexDirection: "row",
     flexWrap: "nowrap",
     padding: "0em 3.5625em",
     display: "flex",
     margin: "0 auto",
-    width: "50%",
+    width: "100%",
 
     justifyContent: "space-between",
     "@media (max-width: 1330px)": {
@@ -37,12 +37,16 @@ export const styles = makeStyles((theme) => ({
   block: {
     display: "flex",
     flexDirection: "row-reverse",
-    paddingTop: "36px",
+    paddingTop: "140px",
   },
   button: {
     width: "166px",
     height: "40px",
     marginBottom: "50px",
+  },
+  itemNameButton: {
+    width: "100%",
+    height: "50px",
   },
   backButton: {
     width: "166px",
@@ -59,5 +63,13 @@ export const styles = makeStyles((theme) => ({
   },
   required: {
     color: "red",
+  },
+  displayButton: {
+    width: "100%",
+    height: "50px",
+    backgroundColor: "#ff9200",
+  },
+  listTable: {
+    paddingTop: "10px",
   },
 }));

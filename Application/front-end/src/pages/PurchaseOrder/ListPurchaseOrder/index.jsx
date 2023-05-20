@@ -12,6 +12,7 @@ import Typography from "@material-ui/core/Typography";
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
 import PageLayout from "../../../components/PageLayout";
 import LabelledEditableSelect from "../../../components/LabelledEditableSelect";
+import ManageRequest from "../ManageRequest";
 
 import useRequest from "../../../hooks/services/useRequest";
 import useItemNames from "../../../hooks/services/useItemNames";
@@ -25,6 +26,7 @@ const ListPurchaseOrder = () => {
   const [itemColor, setItemColor] = useState();
   const [requestNumber, setRequestNumber] = useState();
   const [list, setList] = useState(0);
+  const [openPurchaseOrder, setOpenPurchaseOrder] = useState(false);
 
   const { data: itemColors } = useColors();
   const { data: itemNames } = useItemNames();
@@ -106,7 +108,9 @@ const ListPurchaseOrder = () => {
     },
   ];
 
-  const handleCreatePurchaseOrder = () => {};
+  const handleCreatePurchaseOrder = () => {
+    setOpenPurchaseOrder(true);
+  };
 
   return (
     <>
@@ -115,16 +119,14 @@ const ListPurchaseOrder = () => {
           pageHeading={"Purchase Order"}
           pageActions={
             <Grid>
-              <Link to="/PurchaseOrder/Create" className={classes.link}>
-                <Button
-                  id="btn-create-purchase-order"
-                  variant="contained"
-                  onClick={handleCreatePurchaseOrder}
-                >
-                  <AddCircleOutlineIcon className={classes.plusIcon} />
-                  {"Create Purchase Order"}
-                </Button>
-              </Link>
+              <Button
+                id="btn-create-purchase-order"
+                variant="contained"
+                onClick={handleCreatePurchaseOrder}
+              >
+                <AddCircleOutlineIcon className={classes.plusIcon} />
+                {"Create Purchase Order"}
+              </Button>
             </Grid>
           }
         >
@@ -184,6 +186,10 @@ const ListPurchaseOrder = () => {
           </>
         </PageLayout>
       </Grid>
+      <ManageRequest
+        openPurchaseOrder={openPurchaseOrder}
+        setOpenPurchaseOrder={setOpenPurchaseOrder}
+      />
     </>
   );
 };

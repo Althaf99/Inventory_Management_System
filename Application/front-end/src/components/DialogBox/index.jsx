@@ -71,15 +71,18 @@ const DialogBox = ({
               {backButtonTitle}
             </NavigationButton>
           )}
-          <NavigationButton
-            id={id}
-            updatingStatus={updatingStatus}
-            onClickHandler={handleSaveButton}
-            disableStatus={disableStatus}
-            sx={classes.saveButton}
-          >
-            {saveButtonTitle}
-          </NavigationButton>
+          {saveButtonTitle && (
+            <NavigationButton
+              id={id}
+              updatingStatus={updatingStatus}
+              onClickHandler={handleSaveButton}
+              disableStatus={disableStatus}
+              sx={classes.saveButton}
+              type={props.type}
+            >
+              {saveButtonTitle}
+            </NavigationButton>
+          )}
         </DialogActions>
       </Dialog>
     </>

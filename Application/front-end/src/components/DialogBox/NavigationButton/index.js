@@ -11,6 +11,7 @@ const NavigationButton = ({
   disableStatus,
   updatingStatus,
   sx,
+  type,
 }) => {
   return (
     <Button
@@ -26,6 +27,7 @@ const NavigationButton = ({
       }
       disabled={disableStatus === true ? true : false}
       onClick={onClickHandler}
+      type={type}
     >
       {children}
     </Button>

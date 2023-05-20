@@ -17,6 +17,7 @@ const LabelledEditableSelect = ({
   onChange,
   required,
   errorMsg,
+  disabled,
 }) => {
   const theme = useTheme();
   const classes = styles(theme);
@@ -56,12 +57,15 @@ const LabelledEditableSelect = ({
           renderInput={(params) => (
             <TextField
               {...params}
+              variant={disabled ? "filled" : "outlined"}
               placeholder={placeholder}
-              variant="outlined"
               onChange={(e) => {
                 onChange(getValue(e.target.value));
               }}
               error={errorMsg ? true : false}
+              hiddenLabel={disabled ? true : false}
+              disabled={disabled ? true : false}
+              id={disabled && "filled-hidden-label-normal"}
             />
           )}
         />
