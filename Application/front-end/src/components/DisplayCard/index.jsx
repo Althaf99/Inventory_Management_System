@@ -4,7 +4,6 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import { Grid } from "@material-ui/core";
-import Typography from "@mui/material/Typography";
 
 import { styles } from "./styles";
 

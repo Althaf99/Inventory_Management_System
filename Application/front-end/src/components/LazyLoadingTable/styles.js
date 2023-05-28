@@ -6,14 +6,15 @@ const styles = () => {
     font-family: Nunito;
     font-style: normal;
     font-weight: bold;
-    font-size: 19px;
+    font-size: 22px;
     line-height: 22px;
-    color: #2596be;
+    color: White;
+    background-color: #354247;
     margin-bottom: 10px;
   `;
 
   const row = css`
-    box-shadow: 0px 1px 8px rgba(20, 46, 110, 0.1);
+    box-shadow: 0px 1px 8px rgb(219, 191, 250);
     border-radius: 10px;
     height: 50px !important;
   `;
@@ -21,10 +22,11 @@ const styles = () => {
   const cell = css`
     font-family: Nunito;
     font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
+    font-weight: bold;
+    font-size: 19px;
     line-height: 18px;
-    color: #283032;
+    color: Black;
+    background-color: #eef3fc;
   `;
 
   const cellDeleted = css`
@@ -52,6 +54,10 @@ const styles = () => {
       text-align: right;
     },
   `;
+  const tableHeaderForSticky = css`
+    position: sticky;
+    z-index: 999;
+  `;
 
   return {
     head,
@@ -60,6 +66,7 @@ const styles = () => {
     cellDeleted,
     textTruncate,
     textTruncateTextWrap,
+    tableHeaderForSticky,
   };
 };
 

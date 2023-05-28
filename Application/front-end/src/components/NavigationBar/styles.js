@@ -4,8 +4,10 @@ export const styles = makeStyles((theme) => ({
   children: {
     padding: "30px",
     backgroundColor: "#F5F5F5",
-    height: "1400px",
+    height: "100%",
     width: "100%",
+    margin: "0",
+    overflow: "hidden",
   },
   navlinks: {
     marginLeft: theme.spacing(10),

@@ -9,9 +9,11 @@ const styles = (theme) => {
     font-family: Nunito !important;
     font-weight: 600 !important;
     font-style: normal !important;
-    font-size: 30px !important;
     line-height: 41px !important;
-    color: #813d4d;
+    font-weight: 500;
+    font-size: 40px !important;
+    line-height: 48px;
+    color: #1e88e5;
   `;
   const helperTextSection = css`
     padding-top: 15px;

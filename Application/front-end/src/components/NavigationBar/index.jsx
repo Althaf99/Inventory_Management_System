@@ -27,6 +27,9 @@ const NavigationBar = () => {
             <Link to="/Dashboard" className={classes.link}>
               Dashboard
             </Link>
+            <Link to="/DeliveryNote" className={classes.link}>
+              Delivery Note
+            </Link>
             <Link to="/Invoice" className={classes.link}>
               Invoice
             </Link>

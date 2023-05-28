@@ -8,6 +8,7 @@ const randoliAsh = "rgba(128, 140, 163, 1)"; // HEX - #808ca3
 
 const ThemeDefault = createTheme({
   overrides: {
+    MuiTextField: {},
     MuiDrawer: {
       paper: {
         width: "500px",

@@ -2,9 +2,10 @@ import React, { useState } from "react";
 
 import { Grid } from "@mui/material";
 import FormControl from "@material-ui/core/FormControl";
-import LabelledEditableSelect from "../../../components/LabelledEditableSelect";
 
+import LabelledEditableSelect from "../../../components/LabelledEditableSelect";
 import DialogBox from "../../../components/DialogBox";
+import LabeledTextField from "../../../components/LabeledTextField";
 
 const Items = ({
   openItems,
@@ -50,7 +51,7 @@ const Items = ({
               <Grid item className={classes.textField}>
                 <Grid item>
                   <FormControl fullWidth>
-                    <LabelledEditableSelect
+                    <LabeledTextField
                       id="unitPrice"
                       name="unitPrice"
                       label="Unit Price"

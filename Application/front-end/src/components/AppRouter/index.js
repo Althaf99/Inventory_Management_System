@@ -8,6 +8,7 @@ import ListPurchaseOrder from "../../pages/PurchaseOrder/ListPurchaseOrder";
 import ManageRequest from "../../pages/PurchaseOrder/ManageRequest";
 import ListInvoice from "../../pages/Invoice/List-Invoice";
 import ManageInvoice from "../../pages/Invoice/Manage-Invoice";
+import ListDeliveryNote from "../../pages/DeliveryNote/List-DeliveryNote";
 
 const AppRouter = () => {
   const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const AppRouter = () => {
         {
           path: "Invoice/Create",
           element: <ManageInvoice />,
+        },
+        {
+          path: "DeliveryNote",
+          element: <ListDeliveryNote />,
         },
       ],
     },

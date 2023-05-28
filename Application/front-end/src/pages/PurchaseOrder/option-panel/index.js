@@ -8,9 +8,8 @@ import DeleteIcon from "../../../components/DeleteIcon";
 
 import { styles } from "../ListPurchaseOrder/styles";
 
-const OptionPanel = ({ values, isDeleted }) => {
+const OptionPanel = ({ values }) => {
   const classes = styles();
-
   return (
     <Grid>
       {values?.quantity <= 0 ? (

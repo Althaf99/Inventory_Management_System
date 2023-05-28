@@ -9,3 +9,9 @@ export const ROUTE_CONTACT_US = "/contactUs";
 export const ROUTE_PARTNERS = "/partners";
 export const ROUTE_LOCATION = "/location";
 export const ROUTE_PRODUCTS = "/products";
+
+export const FLOW = {
+  CREATE: "Create",
+  EDIT: "Edit",
+  VIEW: "View",
+};

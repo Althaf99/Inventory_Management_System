@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 import OptionPanel from "../option-panel";
 import { styles } from "./styles";
@@ -7,17 +6,19 @@ import { styles } from "./styles";
 import { Button } from "@mui/material";
 import { Grid } from "@material-ui/core";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import Typography from "@material-ui/core/Typography";
 
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
 import PageLayout from "../../../components/PageLayout";
 import LabelledEditableSelect from "../../../components/LabelledEditableSelect";
+
 import ManageRequest from "../ManageRequest";
 
 import useRequest from "../../../hooks/services/useRequest";
 import useItemNames from "../../../hooks/services/useItemNames";
 import useRequestNumbers from "../../../hooks/services/useRequestNumbers";
 import useColors from "../../../hooks/services/useColors";
+
+import { FLOW } from "../../../constants";
 
 const ListPurchaseOrder = () => {
   const classes = styles();
@@ -76,22 +77,36 @@ const ListPurchaseOrder = () => {
     {
       Header: "PO Number",
       accessor: "po",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
     },
     {
       Header: "Item Name",
       accessor: "itemName",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
     },
     {
       Header: "Item Color",
       accessor: "itemColor",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
     },
     {
       Header: "Unit Price",
       accessor: "unitPrice",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
     },
     {
       Header: "Balance",
       accessor: "quantity",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "PO Date",
+      accessor: "date",
     },
     {
       Header: "Actions",
@@ -133,7 +148,7 @@ const ListPurchaseOrder = () => {
           <Grid container spacing={2} className={classes.topCards}>
             <Grid item xs={2} className={classes.section}>
               <LabelledEditableSelect
-                label="PO Number"
+                label="PO NUMBER"
                 id="requestNum"
                 name="requestNum"
                 placeholder="Select PO Number"
@@ -144,7 +159,7 @@ const ListPurchaseOrder = () => {
             </Grid>
             <Grid item xs={2} className={classes.section}>
               <LabelledEditableSelect
-                label="Item Name"
+                label="ITEM NAME"
                 id="itemName"
                 name="itemName"
                 placeholder="Select Item Name"
@@ -155,7 +170,7 @@ const ListPurchaseOrder = () => {
             </Grid>
             <Grid item xs={2} className={classes.section}>
               <LabelledEditableSelect
-                label="Item Color"
+                label="ITEM COLOR"
                 id="itemColor"
                 name="itemColor"
                 placeholder="Select Item Color"
@@ -169,27 +184,29 @@ const ListPurchaseOrder = () => {
             </Grid>
           </Grid>
 
-          <>
-            <Grid item className={classes.section} xs={12}>
-              {requestData && (
-                <LazyLoadingTable
-                  columns={columns}
-                  data={requestData}
-                  hiddenColumns={["id"]}
-                  maxHeightInRows={10}
-                  onClickTableRow={(index, row) => {
-                    console.log(index, row);
-                  }}
-                />
-              )}
-            </Grid>
-          </>
+          <Grid item className={classes.section} xs={12}>
+            {requestData && (
+              <LazyLoadingTable
+                columns={columns}
+                data={requestData}
+                hiddenColumns={["id", "date"]}
+                maxHeightInRows={10}
+                onClickTableRow={(index, row) => {
+                  console.log(index, row);
+                }}
+              />
+            )}
+          </Grid>
         </PageLayout>
+
+        <ManageRequest
+          itemColorsArray={itemColorsArray}
+          itemNamesArray={itemNamesArray}
+          requestNumbersArray={requestNumbersArray}
+          openPurchaseOrder={openPurchaseOrder}
+          setOpenPurchaseOrder={setOpenPurchaseOrder}
+        />
       </Grid>
-      <ManageRequest
-        openPurchaseOrder={openPurchaseOrder}
-        setOpenPurchaseOrder={setOpenPurchaseOrder}
-      />
     </>
   );
 };

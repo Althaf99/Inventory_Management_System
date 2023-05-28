@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-const useRequest = ({ itemName, itemColor, requestNumber }) => {
+const useRequest = ({ itemName, itemColor, requestNumber, date }) => {
   const fetchRequest = async () => {
     const query = new URLSearchParams();
     if (itemName) {
@@ -12,6 +12,9 @@ const useRequest = ({ itemName, itemColor, requestNumber }) => {
     }
     if (requestNumber) {
       query.append("po", requestNumber);
+    }
+    if (date) {
+      query.append("date", date);
     }
     try {
       const data = await axios.get(
@@ -25,7 +28,7 @@ const useRequest = ({ itemName, itemColor, requestNumber }) => {
   };
 
   return useQuery(
-    ["requestData", itemName, itemColor, requestNumber],
+    ["requestData", itemName, itemColor, requestNumber, date],
     fetchRequest,
     {
       refetchOnWindowFocus: false,

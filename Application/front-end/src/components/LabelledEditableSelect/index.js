@@ -44,7 +44,7 @@ const LabelledEditableSelect = ({
       <FormControl variant="outlined" fullWidth error={errorMsg ? true : false}>
         <Autocomplete
           freeSolo
-          disableClearable
+          Clearable
           options={
             items
               ? items?.map((item) => (item.name ? item.name : item.value))

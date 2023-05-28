@@ -5,6 +5,8 @@ export const styles = makeStyles((theme) => ({
     flexDirection: "column",
     flexWrap: "nowrap",
     paddingTop: "20px",
+    backgroundColor: "#FFFFFF",
+    padding: "30px",
   },
   plusIcon: {
     width: "30px",

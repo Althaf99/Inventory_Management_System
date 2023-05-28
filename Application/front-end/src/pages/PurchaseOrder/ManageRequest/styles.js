@@ -4,7 +4,6 @@ export const styles = makeStyles((theme) => ({
   container: {
     flexDirection: "row",
     flexWrap: "nowrap",
-    padding: "0em 3.5625em",
     display: "flex",
     margin: "0 auto",
     width: "100%",
@@ -20,6 +19,10 @@ export const styles = makeStyles((theme) => ({
   // headingTitle: theme.appDirector.pageHeading,
   section: {
     paddingTop: "20px",
+    flex: 1,
+  },
+  buttonSection: {
+    paddingTop: "50px",
     flex: 1,
   },
   cssOutlinedInput: {
