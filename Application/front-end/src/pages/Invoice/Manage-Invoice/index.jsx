@@ -204,6 +204,7 @@ const ManageInvoice = ({
                   {selectedItems && (
                     <LazyLoadingTable
                       columns={columns}
+                      InfiniteScroll={false}
                       data={selectedItems}
                       hiddenColumns={["id"]}
                       maxHeightInRows={15}

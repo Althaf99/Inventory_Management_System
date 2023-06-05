@@ -88,6 +88,7 @@ const Item = ({
             <Grid item className={classes.listTable} xs={12}>
               <LazyLoadingTable
                 columns={columns}
+                InfiniteScroll={false}
                 data={item}
                 hiddenColumns={["id"]}
                 maxHeightInRows={10}

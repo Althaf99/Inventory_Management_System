@@ -127,6 +127,10 @@ const ListPurchaseOrder = () => {
     setOpenPurchaseOrder(true);
   };
 
+  const filteredRequestArray = requestData?.filter(
+    (element) => element.quantity > 0
+  );
+
   return (
     <>
       <Grid container classes={{ container: classes.gridContainer }}>
@@ -185,15 +189,16 @@ const ListPurchaseOrder = () => {
           </Grid>
 
           <Grid item className={classes.section} xs={12}>
-            {requestData && (
+            {filteredRequestArray && (
               <LazyLoadingTable
                 columns={columns}
-                data={requestData}
+                data={filteredRequestArray}
                 hiddenColumns={["id", "date"]}
                 maxHeightInRows={10}
                 onClickTableRow={(index, row) => {
                   console.log(index, row);
                 }}
+                customProps={{ height: "1200px" }}
               />
             )}
           </Grid>

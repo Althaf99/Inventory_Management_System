@@ -20,6 +20,9 @@ const useStyles = makeStyles((theme) => ({
   errorTextField: {
     borderColor: "red !important",
   },
+  textBox: {
+    height: "100px",
+  },
 }));
 
 const LabeledTextField = ({
@@ -38,7 +41,12 @@ const LabeledTextField = ({
         {label}
         {required ? <span className={classes.required}> *</span> : ""}
       </span>
-      <FormControl variant="outlined" fullWidth>
+      <FormControl
+        variant="outlined"
+        fullWidth
+        size="medium"
+        className={classes.textBox}
+      >
         <TextField
           variant="outlined"
           inputProps={

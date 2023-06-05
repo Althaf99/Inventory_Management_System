@@ -252,6 +252,7 @@ const ManageRequest = ({
                   <Grid item className={classes.listTable} xs={12}>
                     <LazyLoadingTable
                       columns={columns}
+                      InfiniteScroll={false}
                       data={selectedItems}
                       hiddenColumns={["id"]}
                       maxHeightInRows={15}

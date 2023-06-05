@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 import OptionPanel from "../option-panel";
 import { styles } from "./styles";
 
-import { Grid, Button } from "@material-ui/core";
-import { Typography } from "@mui/material";
+import { Grid } from "@material-ui/core";
+import { Typography, Button } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { css } from "@emotion/react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
@@ -45,16 +46,19 @@ const ListInvoice = () => {
   const classes = styles();
   const headingStyle = useStyles();
 
-  const [itemName, setItemName] = useState();
-  const [itemColor, setItemColor] = useState();
-  const [requestNumber, setRequestNumber] = useState();
+  const [itemName, setItemName] = useState("");
+  const [itemColor, setItemColor] = useState("");
+  const [requestNumber, setRequestNumber] = useState("");
   const [list, setList] = useState(0);
   const [openInvoiceDialog, setOpenInvoiceDialog] = useState(false);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState();
   const [invoiceNo, setInvoiceNo] = useState(0);
+  const [searchInvoiceNo, setSearchInvoiceNo] = useState();
 
   const { data: itemColors } = useColors();
   const { data: itemNames } = useItemNames();
+
+  const navigate = useNavigate();
 
   const itemNamesArray =
     itemNames &&
@@ -71,12 +75,12 @@ const ListInvoice = () => {
       name: itemColor,
       value: itemColor,
     }));
-
   const { data: invoiceData } = useInvoice({
     itemName: itemName,
     itemColor: itemColor,
     requestNumber: requestNumber,
-    invoiceDate: formatDate(date),
+    invoiceDate: date ? formatDate(date) : date,
+    invoiceNo: searchInvoiceNo,
   });
 
   const requestNumbersArray =
@@ -87,17 +91,36 @@ const ListInvoice = () => {
       value: po,
     }));
 
+  const uniqueValues = new Set();
+
+  // Create a new array without duplicate values
+  const filteredPOList = [];
+  requestNumbersArray &&
+    requestNumbersArray.forEach((item) => {
+      const value = item.value;
+      if (!uniqueValues.has(value)) {
+        uniqueValues.add(value);
+        filteredPOList.push(item);
+      }
+    });
+
   const { data: excessData } = useExcess({
     itemName: itemName,
     itemColor: itemColor,
     requestNumber: requestNumber,
-    excessDeliveredDate: formatDate(date),
+    excessDeliveredDate: date ? formatDate(date) : date,
   });
 
   const columns = [
     {
       Header: "ID",
       accessor: "id",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "PO Date",
+      accessor: "poDate",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
@@ -121,14 +144,22 @@ const ListInvoice = () => {
       cellStyles: { textAlign: "center" },
     },
     {
+      Header: "Quantity",
+      accessor: "quantity",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
       Header: "Unit Price",
       accessor: "unitPrice",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
+
     {
-      Header: "Quantity",
-      accessor: "quantity",
+      Header: "Amount",
+      accessor: "amount",
+      cell: (value) => Number.parseFloat(value).toFixed(2),
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
@@ -168,17 +199,24 @@ const ListInvoice = () => {
 
   useEffect(() => {
     let sum = 0;
-    const test = invoiceData && invoiceData.map((item) => item.quantity);
+    const test = invoiceData?.map((item) => item.amount);
     test ? test.forEach((element) => setList((sum += element))) : setList(0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [requestNumbersArray, itemColorsArray, itemNamesArray]);
 
   useEffect(() => {
     const invoiceList =
-      invoiceData && invoiceData.find((element) => element?.invoiceNo);
+      (requestNumber?.length > 0 || searchInvoiceNo?.length > 0) &&
+      invoiceData &&
+      invoiceData?.find((element) => element?.invoiceNo);
+
     setInvoiceNo(invoiceList ? invoiceList.invoiceNo : "-");
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [date, requestNumber]);
+  }, [date, requestNumber, invoiceData]);
+
+  const handlePrintInvoice = () => {
+    navigate(`/printer/${invoiceNo}`, { state: { amount: list } });
+  };
 
   return (
     <>
@@ -189,7 +227,7 @@ const ListInvoice = () => {
             <>
               <Grid>
                 <Button
-                  id="btn-create-purchase-order"
+                  id="btn-create-invoice"
                   variant="contained"
                   onClick={handleAddInvoice}
                 >
@@ -197,9 +235,25 @@ const ListInvoice = () => {
                   {"Add Invoice No"}
                 </Button>
               </Grid>
+              <Grid className={classes.printButton}>
+                <Button
+                  id="btn-create-invoice"
+                  variant="contained"
+                  onClick={handlePrintInvoice}
+                >
+                  <AddCircleOutlineIcon className={classes.plusIcon} />
+                  {"Print Invoice"}
+                </Button>
+              </Grid>
             </>
           }
         >
+          <Grid>
+            <Grid className={classes.totalAmount}>{`Total : ${list}`}</Grid>
+            <Grid className={classes.totalAmount}>
+              {`Invoice No : ${invoiceNo}`}
+            </Grid>
+          </Grid>
           <Grid container spacing={2} className={classes.topCards}>
             <Grid item xs={2} className={classes.section}>
               <Grid className={classes.label}>SELECT DATE</Grid>
@@ -216,7 +270,7 @@ const ListInvoice = () => {
                 placeholder="Select PO Number"
                 onChange={(value) => setRequestNumber(value)}
                 value={requestNumber}
-                items={requestNumbersArray}
+                items={filteredPOList}
               />
             </Grid>
             <Grid item xs={2} className={classes.section}>
@@ -241,11 +295,17 @@ const ListInvoice = () => {
                 items={itemColorsArray}
               />
             </Grid>
-            <Grid item xs={0} className={classes.totalAmount}>
-              {list}
-            </Grid>
-            <Grid item xs={0} className={classes.totalAmount}>
-              {`Invoice NO : ${invoiceNo}`}
+            <Grid item xs={2} className={classes.section}>
+              <FormControl fullWidth>
+                <LabeledTextField
+                  label="INVOICE NO"
+                  id="invoiceNo"
+                  name="invoice"
+                  placeholder="Select Invoice No"
+                  onChange={(value) => setSearchInvoiceNo(value)}
+                  value={searchInvoiceNo}
+                />
+              </FormControl>
             </Grid>
           </Grid>
           <Typography sx={headingStyle.headingTitle}>Invoices</Typography>
@@ -254,6 +314,7 @@ const ListInvoice = () => {
               <LazyLoadingTable
                 columns={columns}
                 data={invoiceData}
+                InfiniteScroll={false}
                 hiddenColumns={["id"]}
                 maxHeightInRows={15}
                 onClickTableRow={(index, row) => {
@@ -269,6 +330,7 @@ const ListInvoice = () => {
               <LazyLoadingTable
                 columns={columns}
                 data={excessData}
+                InfiniteScroll={false}
                 hiddenColumns={["id", "po", "unitPrice"]}
                 maxHeightInRows={15}
                 onClickTableRow={(index, row) => {
@@ -279,12 +341,6 @@ const ListInvoice = () => {
             )}
           </Grid>
         </PageLayout>
-        {/* <ManageInvoice
-          itemColorsArray={itemColorsArray}
-          itemNamesArray={itemNamesArray}
-          openInvoiceDialog={openInvoiceDialog}
-          setOpenInvoiceDialog={setOpenInvoiceDialog}
-        /> */}
       </Grid>
       <AlertDialogBox
         open={openInvoiceDialog}

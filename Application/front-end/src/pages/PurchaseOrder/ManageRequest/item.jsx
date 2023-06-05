@@ -89,6 +89,7 @@ const Item = ({
               <LazyLoadingTable
                 columns={columns}
                 data={item}
+                InfiniteScroll={false}
                 hiddenColumns={["id"]}
                 maxHeightInRows={10}
                 onClickTableRow={(index, row) => {

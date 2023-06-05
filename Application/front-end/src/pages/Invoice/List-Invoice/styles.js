@@ -27,7 +27,7 @@ export const styles = makeStyles((theme) => ({
 
   menuIconRoot: {
     width: "16px",
-    height: "16px",
+    height: "14px",
     color: "#808CA3",
     marginRight: "15px",
   },
@@ -89,18 +89,19 @@ export const styles = makeStyles((theme) => ({
     background: "#DFEAFF",
     color: "#0F5EF7",
     fontWeight: "bold",
-    fontSize: "1.563rem",
+    fontSize: "20px",
     lineHeight: "34px",
     padding: "0.625em",
-    width: "10%",
-    height: "50%",
-    marginTop: "1.7%",
+    width: "100%",
+    marginTop: "2.3%",
     borderRadius: "8px",
     fontFamily: "Nunito",
     fontStyle: "normal",
     textAlign: "center",
     marginLeft: "5%",
+    height: "40%",
   },
+
   title: {
     fontWeight: "600 !important",
     fontStyle: "normal !important",
@@ -116,5 +117,8 @@ export const styles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "0.875rem",
     paddingBottom: "14px",
+  },
+  printButton: {
+    paddingTop: "10px",
   },
 }));

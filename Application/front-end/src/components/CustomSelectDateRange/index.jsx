@@ -26,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
   wrapper: {
     width: "80%",
   },
+  popper: {
+    position: "relative",
+    zIndex: "99999",
+  },
 }));
 
 const CustomSelectDateRange = ({ onChange, startDate, endDate }) => {
@@ -35,15 +39,27 @@ const CustomSelectDateRange = ({ onChange, startDate, endDate }) => {
     <div>
       <DatePicker
         placeholderText="Select Date Range"
+        showIcon
+        dateFormat="dd/MM/yyyy"
         onChange={onChange}
         startDate={startDate}
         endDate={endDate}
         selectsRange={true}
         isClearable={true}
-        className={classes.datePickerBox}
-        monthsShown={2}
         calendarClassName={classes.calender}
         wrapperClassName={classes.wrapper}
+        popperClassName={classes.popper}
+        className={classes.datePickerBox}
+        monthsShown={2}
+        popperPlacement="bottom-end"
+        popperModifiers={{
+          offset: { enabled: true, offset: "5px, 10px" },
+          preventOverflow: {
+            enabled: true,
+            escapeWithReference: false,
+            boundariesElement: "viewport",
+          },
+        }}
       />
     </div>
   );

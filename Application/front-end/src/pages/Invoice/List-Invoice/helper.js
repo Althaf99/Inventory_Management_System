@@ -1,5 +1,5 @@
 function formatDate(date) {
-  const dateObj = new Date(date ? date : new Date());
+  const dateObj = new Date(date && date);
 
   // Get the day, month, and year components from the date object
   const day = dateObj.getDate();

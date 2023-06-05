@@ -35,6 +35,7 @@
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-table": "^7.8.0",
+    "react-to-print": "^2.14.12",
     "react-virtualized-auto-sizer": "^1.0.17",
     "web-vitals": "^2.1.4"
   },

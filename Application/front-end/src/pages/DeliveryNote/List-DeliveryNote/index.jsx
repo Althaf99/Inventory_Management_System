@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import OptionPanel from "../option-panel";
 import { styles } from "./styles";
@@ -162,9 +162,11 @@ const ListDeliveryNote = () => {
             {deliverNoteData && (
               <LazyLoadingTable
                 columns={columns}
+                hasNextPage={false}
                 data={deliverNoteData}
                 hiddenColumns={["id"]}
-                maxHeightInRows={10}
+                maxHeightInRows={15}
+                customProps={{ height: "750px" }}
                 onClickTableRow={(index, row) => {
                   console.log(index, row);
                 }}

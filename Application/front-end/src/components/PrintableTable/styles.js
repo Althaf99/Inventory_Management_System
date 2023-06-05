@@ -5,12 +5,11 @@ const styles = () => {
     font-family: Nunito;
     font-style: normal;
     font-weight: bold;
-    font-size: 18px;
-    line-height: 5px;
+    font-size: 16px;
+    line-height: 2px;
     color: Black;
     border: solid;
     border-width: thin;
-    margin-bottom: 10px;
   `;
 
   const row = css`
@@ -23,9 +22,9 @@ const styles = () => {
     border: solid;
     border-width: thin;
     font-style: normal;
-    font-size: 16px;
+    font-size: 12px;
+    line-height: 2px;
     color: Black;
-    padding: 4px;
   `;
 
   const cellDeleted = css`

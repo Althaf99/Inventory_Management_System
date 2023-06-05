@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import Grid from "@material-ui/core/Grid";
 import { Button } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { Edit, Delete } from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
 
 import { IconButton } from "@mui/material";
+
 import LazyLoadingTable from "../../components/LazyLoadingTable";
+import { Dashboard } from "../InvoicePrinter";
 
 import { styles } from "./styles";
 
@@ -114,6 +117,8 @@ const data = [
 
 const Home = () => {
   const classes = styles();
+  const location = useLocation();
+  console.log("location", location);
 
   return (
     <>
@@ -131,7 +136,7 @@ const Home = () => {
             <Button
               startIcon={<AddCircleOutlineIcon />}
               classes={{ root: classes.btn }}
-              onClick={() => {}}
+              // onClick={}
             >
               New Stock
             </Button>

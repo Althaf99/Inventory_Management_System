@@ -1,9 +1,13 @@
 import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+} from "react-router-dom";
 
 import NavigationBar from "../NavigationBar";
 import Home from "../../pages/Home";
-import Dashboard from "../../pages/Dashboard";
+import { InvoicePrinter } from "../../pages/InvoicePrinter";
 import ListPurchaseOrder from "../../pages/PurchaseOrder/ListPurchaseOrder";
 import ManageRequest from "../../pages/PurchaseOrder/ManageRequest";
 import ListInvoice from "../../pages/Invoice/List-Invoice";
@@ -11,42 +15,17 @@ import ManageInvoice from "../../pages/Invoice/Manage-Invoice";
 import ListDeliveryNote from "../../pages/DeliveryNote/List-DeliveryNote";
 
 const AppRouter = () => {
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <NavigationBar />,
-      children: [
-        {
-          path: "Home",
-          element: <Home />,
-        },
-        {
-          path: "Dashboard",
-          element: <Dashboard />,
-        },
-        {
-          path: "PurchaseOrder",
-          element: <ListPurchaseOrder />,
-        },
-        {
-          path: "PurchaseOrder/Create",
-          element: <ManageRequest />,
-        },
-        {
-          path: "Invoice",
-          element: <ListInvoice />,
-        },
-        {
-          path: "Invoice/Create",
-          element: <ManageInvoice />,
-        },
-        {
-          path: "DeliveryNote",
-          element: <ListDeliveryNote />,
-        },
-      ],
-    },
-  ]);
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<NavigationBar />}>
+        <Route path="home" element={<Home />} />
+        <Route path="purchaseOrder" element={<ListPurchaseOrder />} />
+        <Route path="invoice" element={<ListInvoice />} />
+        <Route path="printer/:id" element={<InvoicePrinter />} />
+        <Route path="deliveryNote" element={<ListDeliveryNote />} />
+      </Route>
+    )
+  );
   return { router };
 };
 
