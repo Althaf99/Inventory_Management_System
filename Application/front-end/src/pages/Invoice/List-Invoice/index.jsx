@@ -6,7 +6,8 @@ import { styles } from "./styles";
 
 import { Grid } from "@material-ui/core";
 import { Typography, Button } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import NoteAddTwoToneIcon from "@mui/icons-material/NoteAddTwoTone";
+import LocalPrintshopTwoToneIcon from "@mui/icons-material/LocalPrintshopTwoTone";
 import { css } from "@emotion/react";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import FormControl from "@material-ui/core/FormControl";
@@ -17,6 +18,7 @@ import LabelledEditableSelect from "../../../components/LabelledEditableSelect";
 import CustomDatePicker from "../../../components/CustomDatePicker";
 import AlertDialogBox from "../../../components/AlertDialogBox";
 import LabeledTextField from "../../../components/LabeledTextField";
+import { InvoicePrinter } from "../../InvoicePrinter";
 
 import { formatDate } from "./helper.js";
 
@@ -54,6 +56,7 @@ const ListInvoice = () => {
   const [date, setDate] = useState();
   const [invoiceNo, setInvoiceNo] = useState(0);
   const [searchInvoiceNo, setSearchInvoiceNo] = useState();
+  const [printPreview, setPrintPreview] = useState(false);
 
   const { data: itemColors } = useColors();
   const { data: itemNames } = useItemNames();
@@ -215,7 +218,8 @@ const ListInvoice = () => {
   }, [date, requestNumber, invoiceData]);
 
   const handlePrintInvoice = () => {
-    navigate(`/printer/${invoiceNo}`, { state: { amount: list } });
+    setPrintPreview(true);
+    // navigate(`/invoicePrinter/${invoiceNo}`, { state: { amount: list } });
   };
 
   return (
@@ -231,7 +235,7 @@ const ListInvoice = () => {
                   variant="contained"
                   onClick={handleAddInvoice}
                 >
-                  <AddCircleOutlineIcon className={classes.plusIcon} />
+                  <NoteAddTwoToneIcon className={classes.plusIcon} />
                   {"Add Invoice No"}
                 </Button>
               </Grid>
@@ -241,7 +245,7 @@ const ListInvoice = () => {
                   variant="contained"
                   onClick={handlePrintInvoice}
                 >
-                  <AddCircleOutlineIcon className={classes.plusIcon} />
+                  <LocalPrintshopTwoToneIcon className={classes.plusIcon} />
                   {"Print Invoice"}
                 </Button>
               </Grid>
@@ -379,6 +383,12 @@ const ListInvoice = () => {
           />
         }
       />
+      <InvoicePrinter
+        openPrintPreview={printPreview}
+        setOpenPrintPreview={setPrintPreview}
+        invoiceNo={invoiceNo}
+        amount={list}
+      ></InvoicePrinter>
     </>
   );
 };

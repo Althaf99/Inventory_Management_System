@@ -1,4 +1,4 @@
-import React, { forwardRef, useRef, useEffect, useState } from "react";
+import React, { forwardRef, useRef } from "react";
 import ReactToPrint from "react-to-print";
 import { useLocation } from "react-router-dom";
 
@@ -9,9 +9,9 @@ import PrintableTable from "../../components/PrintableTable";
 
 import Fuji from "../../Fuji.png";
 
-import { styles } from "./Styles";
+import { styles } from "./styles";
 
-import useInvoiceByInvoiceNo from "../../hooks/services/useGetInvoiceByInvoiceNo";
+import useDeliveryNote from "../../hooks/services/useDeliveryNote";
 
 const columns = [
   {
@@ -27,22 +27,14 @@ const columns = [
     cellStyles: { textAlign: "center" },
   },
   {
+    Header: "Description",
+    accessor: "description",
+    headerStyles: { textAlign: "center" },
+    cellStyles: { textAlign: "center" },
+  },
+  {
     Header: "Quantity",
     accessor: "quantity",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-  },
-  {
-    Header: "Rate",
-    accessor: "unitPrice",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-  },
-
-  {
-    Header: "Amount",
-    accessor: "amount",
-    cell: (value) => Number.parseFloat(value).toFixed(2),
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
   },
@@ -53,37 +45,20 @@ export const DeliveryNotePrinter = forwardRef(() => {
 
   const location = useLocation();
 
-  const [deliveryNoteDate, setDeliveryNoteDate] = useState();
+  const { deliveryNoteDate } = location.state;
 
   const componentRef = useRef();
 
-  const { data: invoiceData } = useInvoiceByInvoiceNo({
-    invoiceNo: invoiceNo,
+  const { data: deliveryNoteData } = useDeliveryNote({
+    deliveryDate: deliveryNoteDate,
   });
 
-  invoiceData?.forEach((element) => {
+  deliveryNoteData?.forEach((element) => {
     element.item = `${element.itemName} ${element.itemColor}`;
   });
 
-  useEffect(() => {
-    // Filter out the desired object
-    const filteredObject = invoiceData?.filter(
-      (obj) => obj.invoiceNo === invoiceNo
-    )[0];
-
-    // Extract information from the filtered object
-    if (filteredObject) {
-      const { invoiceDate, poDate, po } = filteredObject;
-      setInvoiceDate(invoiceDate);
-      setRequestDate(poDate);
-      setRequestNo(po);
-    } else {
-      console.log("Object not found");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [invoiceData]);
   const printButton = () => {
-    return <Button variant="contained">This Print</Button>;
+    return <Button variant="contained">Print This</Button>;
   };
   return (
     <>
@@ -92,31 +67,34 @@ export const DeliveryNotePrinter = forwardRef(() => {
           <Grid item container spacing={2} justifyContent="space-between">
             <Grid item xs={12}>
               <img src={Fuji} alt="react logo" className={classes.image} />
+              <div>
+                Panagamuwa, Postal Code : 60052, Kurunegala, Telephone :0777 132
+                121, Mail: fujicraft12@gmail.com
+              </div>
             </Grid>
             <Grid item>
-              <Grid>Customer Name : ___________</Grid>
-              <Grid>Address : ___________ </Grid>
-              <Grid>Tel : _____________</Grid>
+              <Grid>
+                Customer Name : <u>M/S Rainco Pvt.Ltd</u>
+              </Grid>
             </Grid>
             <Grid item>
               <Grid>Date : {deliveryNoteDate}</Grid>
             </Grid>
           </Grid>
-          <Grid className={classes.heading}>Invoice ( Part Delivery )</Grid>
+          <Grid className={classes.heading}>
+            <u>DelivertNote</u>
+          </Grid>
           <Grid item xs={12}>
-            {invoiceData && columns && (
+            {deliveryNoteData && columns && (
               <PrintableTable
                 columns={columns}
-                data={invoiceData}
-                customProps={{ height: "400px" }}
-                hiddenColumns={["itemCode", "id"]}
+                data={deliveryNoteData}
+                customProps={{ height: "600px" }}
+                hiddenColumns={["id"]}
                 fontSize="24px"
                 color="#FFFFFF"
               />
             )}
-          </Grid>
-          <Grid item className={classes.totalAmount}>
-            Total : {amount}
           </Grid>
           <Grid item xs={5} className={classes.signature}>
             <Grid>---------------------------------</Grid>

@@ -3,6 +3,14 @@ import { css } from "@emotion/react";
 const randoliBlue2 = "#0f5ef7";
 
 const styles = (theme, props) => {
+  const root = css`
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border: 1px solid rgba(255, 255, 255, 0.98);
+  `;
   const dialog = css`
     height: ${props.height ? props.height : "520px"};
   `;
@@ -57,6 +65,7 @@ const styles = (theme, props) => {
     subLabel,
     backButton,
     saveButton,
+    root,
   };
 };
 export default styles;

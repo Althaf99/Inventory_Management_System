@@ -18,6 +18,7 @@ export const styles = makeStyles((theme) => ({
     position: "relative",
     top: "10%",
     zIndex: "99",
+    paddingBottom: "10px",
   },
   heading: {
     display: " flex",

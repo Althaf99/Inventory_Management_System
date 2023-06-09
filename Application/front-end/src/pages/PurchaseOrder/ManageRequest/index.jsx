@@ -6,6 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import { Button } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import LoupeRoundedIcon from "@mui/icons-material/LoupeRounded";
 
 import { styles } from "./styles";
 
@@ -219,7 +220,7 @@ const ManageRequest = ({
                           onClick={handleOpenItemColorDialogBox}
                           className={classes.itemNameButton}
                         >
-                          <AddCircleOutlineIcon className={classes.plusIcon} />
+                          <LoupeRoundedIcon className={classes.plusIcon} />
                           {"Select Item Color and Item Quantity"}
                         </Button>
                       </Grid>
@@ -241,7 +242,7 @@ const ManageRequest = ({
                           onClick={handleOpenItemNameAndUnitPrice}
                           className={classes.itemNameButton}
                         >
-                          <AddCircleOutlineIcon className={classes.plusIcon} />
+                          <LoupeRoundedIcon className={classes.plusIcon} />
                           {"Select Item Name and Unit Price"}
                         </Button>
                       </Grid>

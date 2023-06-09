@@ -31,7 +31,7 @@ const useInvoice = ({
     }
     try {
       const data = await axios.get(
-        `http://localhost:8080/invoice?${query.toString()}`
+        `http://localhost:8080/invoiceList?${query.toString()}`
       );
 
       return data.data;

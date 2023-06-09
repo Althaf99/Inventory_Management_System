@@ -5,7 +5,7 @@ import { styles } from "./styles";
 
 import { Button } from "@mui/material";
 import { Grid } from "@material-ui/core";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import NoteAddTwoToneIcon from "@mui/icons-material/NoteAddTwoTone";
 
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
 import PageLayout from "../../../components/PageLayout";
@@ -143,7 +143,7 @@ const ListPurchaseOrder = () => {
                 variant="contained"
                 onClick={handleCreatePurchaseOrder}
               >
-                <AddCircleOutlineIcon className={classes.plusIcon} />
+                <NoteAddTwoToneIcon className={classes.plusIcon} />
                 {"Create Purchase Order"}
               </Button>
             </Grid>

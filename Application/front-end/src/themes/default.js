@@ -1,5 +1,5 @@
-import { createTheme } from "@material-ui/core/styles";
-
+// import { createTheme } from "@material-ui/core/styles";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
 const randoliBlue = "rgba(0, 24, 71, 1)"; // HEX - #001847
 const randoliBlue2 = "rgba(15, 94, 247, 1)"; // HEX - #0f5ef7
 // const randoliBlue3 = 'rgba(65, 152, 253, 1)';
@@ -82,25 +82,25 @@ const ThemeDefault = createTheme({
       },
     },
   },
-  MuiButton: {
-    root: {
-      minWidth: "166px",
-      height: "40px",
-      borderRadius: "4px",
-      textTransform: "uppercase",
-      "&:hover": {
-        backgroundColor: `${randoliBlue2}`,
-      },
-    },
-    contained: {
-      fontFamily: "Nunito",
-      fontStyle: "normal",
-      fontWeight: "bold",
-      fontSize: "14px",
-      color: "white",
-      backgroundColor: `${randoliBlue2}`,
-    },
-  },
+  // MuiButton: {
+  //   root: {
+  //     minWidth: "166px",
+  //     height: "40px",
+  //     borderRadius: "4px",
+  //     textTransform: "uppercase",
+  //     "&:hover": {
+  //       backgroundColor: `${randoliBlue2}`,
+  //     },
+  //   },
+  //   contained: {
+  //     fontFamily: "Nunito",
+  //     fontStyle: "normal",
+  //     fontWeight: "bold",
+  //     fontSize: "14px",
+  //     color: "white",
+  //     backgroundColor: `${randoliBlue2}`,
+  //   },
+  // },
   MuiAccordionSummary: {
     root: {
       "&.Mui-expanded": {

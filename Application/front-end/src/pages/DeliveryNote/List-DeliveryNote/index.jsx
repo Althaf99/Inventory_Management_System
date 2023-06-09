@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import OptionPanel from "../option-panel";
 import { styles } from "./styles";
@@ -22,6 +23,7 @@ import useDeliveryNote from "../../../hooks/services/useDeliveryNote";
 
 const ListDeliveryNote = () => {
   const classes = styles();
+  const navigate = useNavigate();
 
   const [itemName, setItemName] = useState();
   const [itemColor, setItemColor] = useState();
@@ -107,6 +109,11 @@ const ListDeliveryNote = () => {
   const handleDateSelect = (date) => {
     setDate(date);
   };
+  const handlePrintDeliveryNote = () => {
+    navigate(`/deliveryNotePrinter`, {
+      state: { deliveryNoteDate: formatDate(date) },
+    });
+  };
 
   return (
     <>
@@ -123,6 +130,16 @@ const ListDeliveryNote = () => {
                 <AddCircleOutlineIcon className={classes.plusIcon} />
                 {"Create Delivery Note"}
               </Button>
+              <Grid className={classes.printButton}>
+                <Button
+                  id="btn-create-invoice"
+                  variant="contained"
+                  onClick={handlePrintDeliveryNote}
+                >
+                  <AddCircleOutlineIcon className={classes.plusIcon} />
+                  {"Print Invoice"}
+                </Button>
+              </Grid>
             </Grid>
           }
         >

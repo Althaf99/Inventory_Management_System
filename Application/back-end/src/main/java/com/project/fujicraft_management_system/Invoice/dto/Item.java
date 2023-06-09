@@ -4,7 +4,7 @@ public class Item {
 
 
 
-    private String invoiceNo;
+    private int invoiceNo;
 
     private int quantity;
 

@@ -76,4 +76,9 @@ export const styles = makeStyles((theme) => ({
     minWidth: "50px",
     height: "26px",
   },
+  block: {
+    display: "flex",
+    flexDirection: "row-reverse",
+    paddingTop: "140px",
+  },
 }));

@@ -48,6 +48,6 @@ public class Invoice {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     private LocalDate invoiceDate;
 
-    private String invoiceNo;
+    private int invoiceNo;
 
 }

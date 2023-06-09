@@ -19,13 +19,13 @@ public class InvoiceController {
 
 
 
-    @GetMapping("/invoice")
-    private List<Invoice> getInvoice(@RequestParam(required = false) String itemName, @RequestParam(required = false) String itemColor, @RequestParam(required = false) String po, @RequestParam(required = false) String poDate,@RequestParam(required = false) String invoiceDate,@RequestParam(required = false) String invoiceNo){
+    @GetMapping("/invoiceList")
+    private List<Invoice> getInvoice(@RequestParam(required = false) String itemName, @RequestParam(required = false) String itemColor, @RequestParam(required = false) String po, @RequestParam(required = false) String poDate,@RequestParam(required = false) String invoiceDate,@RequestParam(required = false) Integer invoiceNo){
         return invoiceService.getInvoice( itemName, itemColor, po, poDate,invoiceDate, invoiceNo );
     }
 
     @GetMapping("/invoice/{invoiceNo}")
-    private List<Invoice> getInvoiceByInvoiceNo(@PathVariable("invoiceNo") String invoiceNo){
+    private List<Invoice> getInvoiceByInvoiceNo(@PathVariable("invoiceNo") Integer invoiceNo){
         return invoiceService.getInvoiceByInvoiceNo(invoiceNo);
     }
 
@@ -46,7 +46,7 @@ public class InvoiceController {
     }
 
     @PutMapping("/AddInvoice/{po}/{invoiceDate}/{invoiceNo}")
-    private ResponseEntity<Object> addInvoiceNumber(@PathVariable("po") String po,@PathVariable("invoiceDate") String invoiceDate,@PathVariable("invoiceNo") String invoiceNo){
+    private ResponseEntity<Object> addInvoiceNumber(@PathVariable("po") String po,@PathVariable("invoiceDate") String invoiceDate,@PathVariable("invoiceNo") int invoiceNo){
         return invoiceService.addInvoiceNumber(po,invoiceDate,invoiceNo);
     }
 

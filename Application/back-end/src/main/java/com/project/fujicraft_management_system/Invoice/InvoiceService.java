@@ -97,7 +97,7 @@ public ResponseDto createInvoiceDeliveryNote(DeliveryNoteDto deliveryNoteDto) {
     return responseObj;
 };
 
-    public List<Invoice> getInvoice(String itemName, String itemColor, String po, String poDate, String invoiceDate, String invoiceNo) {
+    public List<Invoice> getInvoice(String itemName, String itemColor, String po, String poDate, String invoiceDate, Integer invoiceNo) {
         List<Invoice> invoice = new ArrayList<>();
         invoiceRepository.findAll(Specification.where(itemNameEquals(itemName)).and(itemColorEquals(itemColor)).and(poEquals(po)).and(poDateEquals(poDate)).and(invoiceDateEquals(invoiceDate)).and(invoiceNumEquals(invoiceNo))).forEach(updated -> invoice.add((Invoice) updated));
         return invoice;
@@ -152,7 +152,7 @@ public ResponseDto createInvoiceDeliveryNote(DeliveryNoteDto deliveryNoteDto) {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<Object> addInvoiceNumber(String po, String invoiceDate, String invoiceNo) {
+    public ResponseEntity<Object> addInvoiceNumber(String po, String invoiceDate, int invoiceNo) {
         List<Invoice> invoiceList=  new ArrayList<>();
 
         List<Invoice> invoiceObj =  invoiceRepository.findAll(Specification.where(poEquals(po)).and(invoiceDateEquals(invoiceDate)));
@@ -175,9 +175,9 @@ public ResponseDto createInvoiceDeliveryNote(DeliveryNoteDto deliveryNoteDto) {
 
     }
 
-    public List<Invoice> getInvoiceByInvoiceNo(String invoiceNo) {
+    public List<Invoice> getInvoiceByInvoiceNo(Integer invoiceNo) {
         List<Invoice> invoice = new ArrayList<>();
-        invoiceRepository.findAll(Specification.where(invoiceNumEquals(invoiceNo))).forEach(updated -> invoice.add((Invoice) updated));
+            invoiceRepository.findAll(Specification.where(invoiceNumEquals(invoiceNo))).forEach(updated -> invoice.add((Invoice) updated));
         return invoice;
     }
 
@@ -228,17 +228,20 @@ public ResponseDto createInvoiceDeliveryNote(DeliveryNoteDto deliveryNoteDto) {
     }
 
 
+    private Specification<Invoice> invoiceNumEquals(final Integer invoiceNo) {
+//        if(invoiceNo > 0){
+//            Integer intObj = Integer.valueOf(invoiceNo);
+            return   invoiceNo == null  ? null : (root, query, builder) -> builder.equal(root.get("invoiceNo"), invoiceNo);
+//        }
+//        return null;
+    }
+
     private Specification<Invoice> excessDeliveredDateEquals(final String excessDeliveredDate) {
         if(!StringUtils.isEmpty(excessDeliveredDate)){
             LocalDate localDate = LocalDate.parse(excessDeliveredDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
             return StringUtils.isEmpty(excessDeliveredDate) ? null : (root, query, builder) -> builder.equal(root.get("excessDeliveredDate"), localDate);
         }
         return null;
-    }
-
-    private Specification<Invoice> invoiceNumEquals(final String invoiceNo) {
-
-        return  StringUtils.isEmpty(invoiceNo) ? null : (root, query, builder) -> builder.equal(root.get("invoiceNo"), invoiceNo);
     }
 
 
