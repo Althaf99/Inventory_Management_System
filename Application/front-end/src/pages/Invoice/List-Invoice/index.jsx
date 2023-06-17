@@ -19,6 +19,7 @@ import CustomDatePicker from "../../../components/CustomDatePicker";
 import AlertDialogBox from "../../../components/AlertDialogBox";
 import LabeledTextField from "../../../components/LabeledTextField";
 import { InvoicePrinter } from "../../InvoicePrinter";
+import { ExcessSheetPrinter } from "../../ExcessSheetPrinter";
 
 import { formatDate } from "./helper.js";
 
@@ -57,6 +58,7 @@ const ListInvoice = () => {
   const [invoiceNo, setInvoiceNo] = useState(0);
   const [searchInvoiceNo, setSearchInvoiceNo] = useState();
   const [printPreview, setPrintPreview] = useState(false);
+  const [excessPreview, setExcessPreview] = useState(false);
 
   const { data: itemColors } = useColors();
   const { data: itemNames } = useItemNames();
@@ -122,6 +124,13 @@ const ListInvoice = () => {
       cellStyles: { textAlign: "center" },
     },
     {
+      Header: "No",
+      accessor: "no",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+      width: "5%",
+    },
+    {
       Header: "PO Date",
       accessor: "poDate",
       headerStyles: { textAlign: "center" },
@@ -135,14 +144,8 @@ const ListInvoice = () => {
     },
 
     {
-      Header: "Item Name",
-      accessor: "itemName",
-      headerStyles: { textAlign: "center" },
-      cellStyles: { textAlign: "center" },
-    },
-    {
-      Header: "Item Color",
-      accessor: "itemColor",
+      Header: "Item",
+      accessor: "item",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
@@ -151,6 +154,7 @@ const ListInvoice = () => {
       accessor: "quantity",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
+      Cell: ({ value }) => <>{value.toLocaleString()}</>,
     },
     {
       Header: "Unit Price",
@@ -165,6 +169,14 @@ const ListInvoice = () => {
       cell: (value) => Number.parseFloat(value).toFixed(2),
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
+      // Cell: ({ value }) => (
+      //   <>
+      //     {value.toLocaleString(undefined, {
+      //       minimumFractionDigits: 2,
+      //       maximumFractionDigits: 2,
+      //     })}
+      //   </>
+      // ),
     },
     {
       Header: "Actions",
@@ -219,9 +231,18 @@ const ListInvoice = () => {
 
   const handlePrintInvoice = () => {
     setPrintPreview(true);
-    // navigate(`/invoicePrinter/${invoiceNo}`, { state: { amount: list } });
   };
 
+  const handlePrintExcess = () => {
+    setExcessPreview(true);
+  };
+
+  let no = 0;
+  invoiceData?.forEach((element) => {
+    element.item = `${element.itemName} ${element.itemColor}`;
+    no = no + 1;
+    element.no = no;
+  });
   return (
     <>
       <Grid container classes={{ container: classes.gridContainer }}>
@@ -253,7 +274,12 @@ const ListInvoice = () => {
           }
         >
           <Grid>
-            <Grid className={classes.totalAmount}>{`Total : ${list}`}</Grid>
+            <Grid
+              className={classes.totalAmount}
+            >{`Total : ${list.toLocaleString(undefined, {
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            })}`}</Grid>
             <Grid className={classes.totalAmount}>
               {`Invoice No : ${invoiceNo}`}
             </Grid>
@@ -329,6 +355,16 @@ const ListInvoice = () => {
           </Grid>
 
           <Typography sx={headingStyle.headingTitle}>Excess</Typography>
+          <Grid className={classes.printButton}>
+            <Button
+              id="btn-create-excessSheet"
+              variant="contained"
+              onClick={handlePrintExcess}
+            >
+              <LocalPrintshopTwoToneIcon className={classes.plusIcon} />
+              {"Print Excess"}
+            </Button>
+          </Grid>
           <Grid item className={classes.section} xs={12}>
             {excessData && (
               <LazyLoadingTable
@@ -389,6 +425,11 @@ const ListInvoice = () => {
         invoiceNo={invoiceNo}
         amount={list}
       ></InvoicePrinter>
+      <ExcessSheetPrinter
+        openPrintPreview={excessPreview}
+        setOpenPrintPreview={setExcessPreview}
+        date={date}
+      ></ExcessSheetPrinter>
     </>
   );
 };

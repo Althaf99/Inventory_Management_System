@@ -62,6 +62,13 @@ const ListDeliveryNote = () => {
       accessor: "id",
     },
     {
+      Header: "No",
+      accessor: "no",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+      width: "5%",
+    },
+    {
       Header: "Delivery Date",
       accessor: "deliveryDate",
       headerStyles: { textAlign: "center" },
@@ -69,8 +76,8 @@ const ListDeliveryNote = () => {
     },
 
     {
-      Header: "Item Name",
-      accessor: "itemName",
+      Header: "Item",
+      accessor: "item",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
@@ -85,6 +92,7 @@ const ListDeliveryNote = () => {
       accessor: "quantity",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
+      Cell: ({ value }) => <>{value.toLocaleString()}</>,
     },
 
     {
@@ -114,6 +122,13 @@ const ListDeliveryNote = () => {
       state: { deliveryNoteDate: formatDate(date) },
     });
   };
+
+  let no = 0;
+  deliverNoteData?.forEach((element) => {
+    element.item = `${element.itemName} ${element.itemColor}`;
+    no = no + 1;
+    element.no = no;
+  });
 
   return (
     <>

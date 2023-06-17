@@ -70,7 +70,7 @@ const PrintableTable = ({
         next={loadMoreItems}
         hasMore={hasNextPage}
         loader={<p>Loading...</p>}
-        height={customProps?.height ? customProps?.height : DEFAULT_HEIGHT}
+        // height={customProps?.height ? customProps?.height : DEFAULT_HEIGHT}
         refreshFunction={isNextPageLoading}
       >
         <Table {...getTableProps()} stickyHeader>

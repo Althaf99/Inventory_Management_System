@@ -26,9 +26,13 @@ const useExcess = ({ itemName, itemColor, excessDeliveredDate }) => {
     }
   };
 
-  return useQuery(["excessData", itemName, itemColor], fetchRequest, {
-    refetchOnWindowFocus: false,
-  });
+  return useQuery(
+    ["excessData", itemName, itemColor, excessDeliveredDate],
+    fetchRequest,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
 };
 
 export default useExcess;

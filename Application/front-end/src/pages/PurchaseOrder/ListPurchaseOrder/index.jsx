@@ -75,26 +75,21 @@ const ListPurchaseOrder = () => {
       accessor: "id",
     },
     {
+      Header: "No",
+      accessor: "no",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+      width: "5%",
+    },
+    {
       Header: "PO Number",
       accessor: "po",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
     {
-      Header: "Item Name",
-      accessor: "itemName",
-      headerStyles: { textAlign: "center" },
-      cellStyles: { textAlign: "center" },
-    },
-    {
-      Header: "Item Color",
-      accessor: "itemColor",
-      headerStyles: { textAlign: "center" },
-      cellStyles: { textAlign: "center" },
-    },
-    {
-      Header: "Unit Price",
-      accessor: "unitPrice",
+      Header: "Item",
+      accessor: "item",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
@@ -103,6 +98,28 @@ const ListPurchaseOrder = () => {
       accessor: "quantity",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
+      Cell: ({ value }) => (
+        <>
+          {value.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </>
+      ),
+    },
+    {
+      Header: "Unit Price",
+      accessor: "unitPrice",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+      Cell: ({ value }) => (
+        <>
+          {value.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          })}
+        </>
+      ),
     },
     {
       Header: "PO Date",
@@ -130,6 +147,13 @@ const ListPurchaseOrder = () => {
   const filteredRequestArray = requestData?.filter(
     (element) => element.quantity > 0
   );
+
+  let no = 0;
+  filteredRequestArray?.forEach((element) => {
+    element.item = `${element.itemName} ${element.itemColor}`;
+    no = no + 1;
+    element.no = no;
+  });
 
   return (
     <>

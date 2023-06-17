@@ -42,8 +42,8 @@ export const styles = makeStyles((theme) => ({
     border: "2px solid black",
     alignSelf: "flex-end",
     padding: "10px",
-    width: "182px",
-    margin: "10px 0px 10px 10px",
+    width: "170px",
+    margin: "10px 0px 450px 10px",
   },
   signature: {
     color: "Black",
@@ -57,10 +57,6 @@ export const styles = makeStyles((theme) => ({
     maxWidth: "32%",
     marginBottom: "20px",
     paddingBottom: "10px",
-    position: "absolute",
-    left: "65%",
-    right: "0",
-    bottom: "0",
   },
   managerText: {
     maxWidth: "36%",
