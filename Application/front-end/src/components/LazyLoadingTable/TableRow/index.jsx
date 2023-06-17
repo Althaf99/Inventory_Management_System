@@ -6,6 +6,7 @@ import { useTheme } from "@mui/material/styles";
 import styles from "../styles";
 import useHover from "../../../hooks/useHover";
 
+
 const Row = ({
   index,
   style,
@@ -19,6 +20,8 @@ const Row = ({
   const row = items[index];
   prepareRow(row);
 
+  
+
   return (
     <TableRow
       id={index}
@@ -27,8 +30,10 @@ const Row = ({
       sx={classes.row}
       hover
       selected={selectedId === index}
+      className={`${isHovered ? 'hoveredRow' : ''} ${selectedId === index ? 'selected' : ''}`}
       {...row.getRowProps()}
       onClick={() => handleRowClick(index, row.values)}
+      
     >
       {row.cells.map((cell) => {
         return (
@@ -43,6 +48,8 @@ const Row = ({
             sx={[
               textWrap ? classes.textTruncateTextWrap : classes.textTruncate,
               row.values.isDeleted ? classes.cellDeleted : classes.cell,
+              isHovered && classes.hoveredCell,
+              
             ]}
           >
             {cell.render("Cell", { isHovered })}
