@@ -1,33 +1,49 @@
 import { css } from "@emotion/react";
+import * as colors from '@mui/material/colors';
 
-const styles = () => {
+
+const styles = (theme) => {
   const head = css`
     font-family: Nunito;
     font-style: normal;
     font-weight: bold;
     font-size: 18px;
     line-height: 5px;
-    color: Black;
-    border: solid;
-    border-width: thin;
+    color: white;
     margin-bottom: 10px;
+    background-color:#058540;
   `;
 
   const row = css`
-    border: solid;
-    border-width: thin;
-  `;
+  background-color: ${colors.grey[800]};
+  
+  &:nth-of-type(even) {
+    background-color: ${colors.grey[900]};
+  }
+  
+  &.selected {
+    background-color: ${colors.blue[900]}; // Change the background color to indicate selection
+  }
+`;
+
+
+const hoveredCell = css`
+  background-color: ${colors.blue[900]};
+`;
+
+
 
   const cell = css`
     font-family: Nunito;
-    border: solid;
-    border-width: thin;
     font-style: normal;
     font-size: 16px;
-    color: Black;
+    font-weight: bold;
+    color: white;
     padding: 4px;
+   
   `;
 
+  
   const cellDeleted = css`
     font-family: Nunito;
     font-style: normal;
@@ -63,6 +79,7 @@ const styles = () => {
     row,
     cell,
     cellDeleted,
+    hoveredCell,
     textTruncate,
     textTruncateTextWrap,
     tableHeaderForSticky,
