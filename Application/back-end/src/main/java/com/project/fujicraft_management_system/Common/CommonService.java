@@ -58,12 +58,44 @@ public class CommonService {
         return null;
     }
 
-    public ResponseEntity<Object> deleteCommonItem(int id) {
+    public ResponseEntity<Object> deleteRequestNumber(int id) {
         try {
             //check if employee exist in database
-            Common common = getRequestBody(id);
-            if (common != null) {
-                commonRepository.deleteById(common.getId());
+            Optional<RequestNumbers> requestNumbers1 = requestNumbersRepository.findById(id);
+            if (requestNumbers1.isPresent()) {
+                requestNumbersRepository.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Object> deleteItemName(int id) {
+        try {
+            //check if employee exist in database
+            Optional<ItemNames> itemNameObj = itemNameRepository.findById(id);
+            if (itemNameObj.isPresent()) {
+                itemNameRepository.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.OK);
+            }
+
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    public ResponseEntity<Object> deleteItemColors(int id) {
+        try {
+            //check if employee exist in database
+            Optional<ItemColors> itemColorObj = itemColorsRepository.findById(id);
+            if (itemColorObj.isPresent()) {
+                itemColorsRepository.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.OK);
             }
 
@@ -85,4 +117,6 @@ public class CommonService {
     public void saveRequestNumber(RequestNumbers requestNumbers) {
         requestNumbersRepository.save(requestNumbers);
     }
+
+
 }

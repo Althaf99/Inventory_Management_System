@@ -77,8 +77,18 @@ public class CommonController {
         return commonService.updateCommonItems(id,common);
     }
 
-    @DeleteMapping("/common/{id}")
+    @DeleteMapping("/requestNumbers/{id}")
     private ResponseEntity<Object> deleteRequest(@PathVariable("id") int id){
-        return commonService.deleteCommonItem(id);
+        return commonService.deleteRequestNumber(id);
+    }
+
+    @DeleteMapping("/itemNames/{id}")
+    private ResponseEntity<Object> deleteItemName(@PathVariable("id") int id){
+        return commonService.deleteItemName(id);
+    }
+
+    @DeleteMapping("/itemColors/{id}")
+    private ResponseEntity<Object> deleteItemColors(@PathVariable("id") int id){
+        return commonService.deleteItemColors(id);
     }
 }
