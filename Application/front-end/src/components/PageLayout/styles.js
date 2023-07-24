@@ -4,8 +4,6 @@ const styles = (theme) => {
   const gridContainer = css`
     flex-direction: column;
     flex-wrap: nowrap;
-  
-    height:80vh;
   `;
   const headingTitle = css`
     font-family: Nunito !important;

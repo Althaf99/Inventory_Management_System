@@ -39,14 +39,7 @@ const columns = [
     accessor: "quantity",
     headerStyles: { textAlign: "center" },
     cellStyles: { textAlign: "center" },
-    Cell: ({ value }) => (
-      <>
-        {value.toLocaleString(undefined, {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2,
-        })}
-      </>
-    ),
+    Cell: ({ value }) => <>{value.toLocaleString()}</>,
     width: "20%",
   },
   {

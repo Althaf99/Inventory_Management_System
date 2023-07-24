@@ -1,6 +1,5 @@
 import { css } from "@emotion/react";
-import * as colors from '@mui/material/colors';
-
+import * as colors from "@mui/material/colors";
 
 const styles = (theme) => {
   const head = css`
@@ -11,39 +10,34 @@ const styles = (theme) => {
     line-height: 5px;
     color: white;
     margin-bottom: 10px;
-    background-color:#058540;
+    background-color: #525fe1;
   `;
 
   const row = css`
-  background-color: ${colors.grey[800]};
-  
-  &:nth-of-type(even) {
-    background-color: ${colors.grey[900]};
-  }
-  
-  &.selected {
-    background-color: ${colors.blue[900]}; // Change the background color to indicate selection
-  }
-`;
+    background-color: #f5eedc;
 
+    &.selected {
+      background-color: ${colors
+        .blue[900]}; // Change the background color to indicate selection
+    }
+    &:nth-of-type(even) {
+      background-color: #c0d8c0;
+    }
+  `;
 
-const hoveredCell = css`
-  background-color: ${colors.blue[900]};
-`;
-
-
+  const hoveredCell = css`
+    background-color: #e2d784;
+  `;
 
   const cell = css`
     font-family: Nunito;
     font-style: normal;
     font-size: 16px;
     font-weight: bold;
-    color: white;
+    color: Black;
     padding: 4px;
-   
   `;
 
-  
   const cellDeleted = css`
     font-family: Nunito;
     font-style: normal;

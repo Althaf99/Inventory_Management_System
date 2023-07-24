@@ -243,6 +243,13 @@ const ListInvoice = () => {
     no = no + 1;
     element.no = no;
   });
+
+  let itd = 0;
+  excessData?.forEach((element) => {
+    element.item = `${element.itemName} ${element.itemColor}`;
+    itd = itd + 1;
+    element.no = itd;
+  });
   return (
     <>
       <Grid container classes={{ container: classes.gridContainer }}>
@@ -353,33 +360,34 @@ const ListInvoice = () => {
               />
             )}
           </Grid>
-
-          <Typography sx={headingStyle.headingTitle}>Excess</Typography>
-          <Grid className={classes.printButton}>
-            <Button
-              id="btn-create-excessSheet"
-              variant="contained"
-              onClick={handlePrintExcess}
-            >
-              <LocalPrintshopTwoToneIcon className={classes.plusIcon} />
-              {"Print Excess"}
-            </Button>
-          </Grid>
-          <Grid item className={classes.section} xs={12}>
-            {excessData && (
-              <LazyLoadingTable
-                columns={columns}
-                data={excessData}
-                InfiniteScroll={false}
-                hiddenColumns={["id", "po", "unitPrice"]}
-                maxHeightInRows={15}
-                onClickTableRow={(index, row) => {
-                  console.log(index, row);
-                }}
-                customProps={{ height: "400px" }}
-              />
-            )}
-          </Grid>
+          {excessData && (
+            <>
+              <Typography sx={headingStyle.headingTitle}>Excess</Typography>
+              <Grid className={classes.printButton}>
+                <Button
+                  id="btn-create-excessSheet"
+                  variant="contained"
+                  onClick={handlePrintExcess}
+                >
+                  <LocalPrintshopTwoToneIcon className={classes.plusIcon} />
+                  {"Print Excess"}
+                </Button>
+              </Grid>
+              <Grid item className={classes.section} xs={12}>
+                <LazyLoadingTable
+                  columns={columns}
+                  data={excessData}
+                  InfiniteScroll={false}
+                  hiddenColumns={["id", "po", "unitPrice", "amount", "poDate"]}
+                  maxHeightInRows={15}
+                  onClickTableRow={(index, row) => {
+                    console.log(index, row);
+                  }}
+                  customProps={{ height: "400px" }}
+                />
+              </Grid>
+            </>
+          )}
         </PageLayout>
       </Grid>
       <AlertDialogBox

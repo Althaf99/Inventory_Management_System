@@ -5,8 +5,9 @@ import { useFormik } from "formik";
 import Grid from "@material-ui/core/Grid";
 import FormControl from "@material-ui/core/FormControl";
 import { Button } from "@mui/material";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import LoupeRoundedIcon from "@mui/icons-material/LoupeRounded";
+import { Delete } from "@mui/icons-material";
+import { IconButton } from "@material-ui/core";
 
 import { styles } from "./styles";
 
@@ -23,38 +24,6 @@ import { formatDate } from "./helper.js";
 
 import useCreateRequest from "../../../hooks/services/useCreateRequest";
 
-const columns = [
-  {
-    Header: "ID",
-    accessor: "id",
-  },
-  {
-    Header: "Item Name",
-    accessor: "itemName",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-  },
-  {
-    Header: "Unit Price",
-    accessor: "unitPrice",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-  },
-  {
-    Header: "Item Color",
-    accessor: "itemColor",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-  },
-  {
-    Header: "Quantity",
-    accessor: "quantity",
-    headerStyles: { textAlign: "center" },
-    cellStyles: { textAlign: "center" },
-    width: "15%",
-  },
-];
-
 const ManageRequest = ({
   setOpenPurchaseOrder,
   openPurchaseOrder,
@@ -62,6 +31,55 @@ const ManageRequest = ({
   itemNamesArray,
   requestNumbersArray,
 }) => {
+  const columns = [
+    {
+      Header: "ID",
+      accessor: "id",
+    },
+    {
+      Header: "Item Name",
+      accessor: "itemName",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "Unit Price",
+      accessor: "unitPrice",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "Item Color",
+      accessor: "itemColor",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+    },
+    {
+      Header: "Quantity",
+      accessor: "quantity",
+      headerStyles: { textAlign: "center" },
+      cellStyles: { textAlign: "center" },
+      width: "15%",
+    },
+    {
+      Header: "Actions",
+      accessor: "actions",
+      headerStyles: { textAlign: "center" },
+      width: "13%",
+      Cell: ({
+        cell: {
+          row: { id, values },
+        },
+      }) => {
+        return (
+          <IconButton onClick={() => reduceArray(id, values)}>
+            <Delete />
+          </IconButton>
+        );
+      },
+    },
+  ];
+
   const classes = styles();
   const [item, setItem] = useState([]);
   const [items, setItems] = useState([]);
@@ -94,11 +112,16 @@ const ManageRequest = ({
       setRequest([]);
     },
   });
+  let no = -1;
+
   const handleSaveItem = () => {
+    no = no + 1;
+    const id = no;
     const values = formik.values;
     const itemObj = {
       itemColor: values.itemColor,
       quantity: values.quantity,
+      id: id,
     };
     setItem([...item, itemObj]);
     formik.setFieldValue("itemColor", "");
@@ -136,7 +159,6 @@ const ManageRequest = ({
     setOpenPurchaseOrder(false);
   };
   const selectedItems = [];
-
   if (request) {
     request.forEach((handle) => {
       const itemName = handle.itemName;
@@ -145,11 +167,23 @@ const ManageRequest = ({
       handle.item.forEach((item) => {
         const itemColor = item.itemColor;
         const quantity = item.quantity;
+        const id = item.id;
 
-        selectedItems.push({ itemName, itemColor, quantity, unitPrice });
+        selectedItems.push({ id, itemName, itemColor, quantity, unitPrice });
       });
     });
   }
+
+  const reduceArray = (id, values) => {
+    console.log("selectedItems", selectedItems);
+    console.log("id", id);
+
+    selectedItems.forEach((element) => {
+      if (element.id == id) {
+        selectedItems.splice(element, 1);
+      }
+    });
+  };
 
   const handleDateSelect = (date) => {
     setDate(date);
@@ -258,9 +292,7 @@ const ManageRequest = ({
                       hiddenColumns={["id"]}
                       maxHeightInRows={15}
                       customProps={{ height: 390 }}
-                      onClickTableRow={(index, row) => {
-                        console.log(index, row);
-                      }}
+                      onClickTableRow={(index, row) => {}}
                     />
                   </Grid>
                 )}

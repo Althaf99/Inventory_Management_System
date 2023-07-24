@@ -6,6 +6,8 @@ export const styles = makeStyles((theme) => ({
     flexWrap: "nowrap",
     backgroundColor: "#FFFFFF",
     padding: "30px",
+    display: "flex",
+    justifyContent: "center",
   },
   plusIcon: {
     width: "30px",
@@ -21,13 +23,18 @@ export const styles = makeStyles((theme) => ({
     height: "100%",
     paddingBottom: "30px",
   },
+  datePicker: {
+    paddingTop: "10px",
+    height: "100%",
+    paddingBottom: "30px",
+  },
   assignBtn: {
     flexDirection: "row-reverse",
   },
 
   menuIconRoot: {
     width: "16px",
-    height: "14px",
+    height: "16px",
     color: "#808CA3",
     marginRight: "15px",
   },
@@ -53,7 +60,7 @@ export const styles = makeStyles((theme) => ({
       backgroundColor: "transparent !important",
     },
     textTransform: "none",
-    color: "#FF5C8D",
+    color: "#FF7C7C",
     padding: 0,
     fontFamily: "Nunito",
     fontStyle: "normal",
@@ -78,11 +85,6 @@ export const styles = makeStyles((theme) => ({
     "@media (max-width: 1330px)": {
       display: "none",
     },
-    fontFamily: "Nunito",
-    fontStyle: "normal",
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: "Black",
   },
   btn: {
     minwidth: "8.3125em",
@@ -94,26 +96,17 @@ export const styles = makeStyles((theme) => ({
     background: "#DFEAFF",
     color: "#0F5EF7",
     fontWeight: "bold",
-    fontSize: "20px",
+    fontSize: "1.563rem",
     lineHeight: "34px",
-    padding: "0.625em",
-    width: "100%",
-    marginTop: "2.3%",
+    // padding: "0.625em",
+    width: "max-content",
+    height: "max-content",
+    marginTop: "1.7%",
     borderRadius: "8px",
     fontFamily: "Nunito",
     fontStyle: "normal",
     textAlign: "center",
-    marginLeft: "5%",
-    height: "40%",
-  },
-
-  title: {
-    fontWeight: "600 !important",
-    fontStyle: "normal !important",
-    fontSize: "20px !important",
-    fontFamily: "Nunito !important",
-    lineHeight: "41px !important",
-    paddingTop: "20px",
+    marginLeft: "40%",
   },
   label: {
     color: "rgba(0, 24, 71, 1)",
@@ -122,8 +115,5 @@ export const styles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "0.875rem",
     paddingBottom: "14px",
-  },
-  printButton: {
-    paddingTop: "10px",
   },
 }));
