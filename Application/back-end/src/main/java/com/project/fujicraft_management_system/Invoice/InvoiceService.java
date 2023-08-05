@@ -47,7 +47,7 @@ public class InvoiceService {
 
                 requestsList.forEach(r -> {
                     Invoice invoiceObj = new Invoice();
-                    if (e.getItemName().equals(r.getItemName()) && r.getQuantity() > 0 && i.getQuantity() > 0) {
+                    if (e.getItemName().equals(r.getItemName()) && i.getItemColor().equals(r.getItemColor())  && r.getQuantity() > 0 && i.getQuantity() > 0) {
                         int remaining = i.getQuantity();
                         invoiceObj.setPo(r.getPo());
                         invoiceObj.setItemName(e.getItemName());

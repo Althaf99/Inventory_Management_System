@@ -19,6 +19,4 @@ public class Items {
 
     private List<Item> item = new ArrayList<>();
 
-
-
 }

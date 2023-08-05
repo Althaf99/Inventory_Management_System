@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3006")
 @RestController
 public class RepairController {
 
@@ -19,22 +20,22 @@ public class RepairController {
     private RepairRepository repairRepository;
 
     @PostMapping("/repair")
-    private Repair saveRepair(@RequestBody Repair repair){
+    private Repair saveRepair(@RequestBody Repair repair) {
         return repairService.saveRepair(repair);
     }
 
     @GetMapping("/repair")
-    private List<Repair> getRepair(){
-        return repairService.getRepair( );
+    private List<Repair> getRepair() {
+        return repairService.getRepair();
     }
 
     @DeleteMapping("/repair")
-    private ResponseEntity<Object> deleteRepair(@PathVariable("id") int id){
+    private ResponseEntity<Object> deleteRepair(@PathVariable("id") int id) {
         return repairService.deleteRepair(id);
     }
 
     @PutMapping("/repair/{id}")
-    private ResponseEntity<Object> updateRepair(@PathVariable("id") int id,@RequestBody Repair repair){
-        return repairService.updateInvoiceItem(id,repair);
+    private ResponseEntity<Object> updateRepair(@PathVariable("id") int id, @RequestBody Repair repair) {
+        return repairService.updateInvoiceItem(id, repair);
     }
 }

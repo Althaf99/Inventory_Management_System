@@ -12,6 +12,7 @@ import java.util.Optional;
 public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
+
     public void saveEmployee(Employee employee) {
         employeeRepository.save(employee);
     }
@@ -22,7 +23,7 @@ public class EmployeeService {
 
     public ResponseEntity<Object> deleteByEmployeeId(int id) {
         try {
-            //check if employee exist in database
+            // check if employee exist in database
             Optional<Employee> emplyee = employeeRepository.findById(id);
             if (emplyee != null) {
                 employeeRepository.deleteById(id);
@@ -41,7 +42,7 @@ public class EmployeeService {
         Employee newEmployee = employeeObj.get();
         if (employeeObj != null) {
             newEmployee.setAge(employee.getAge());
-            newEmployee.setDOB(employee.getDOB());
+            newEmployee.setDob(employee.getDob());
             newEmployee.setName(employee.getName());
             newEmployee.setAddress(employee.getAddress());
             newEmployee.setPhone(employee.getPhone());

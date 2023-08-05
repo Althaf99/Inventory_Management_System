@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+
 @Entity
 @Data
 @Getter
@@ -22,17 +23,15 @@ public class Employee {
     private String name;
 
     @Column
-    private int Age;
+    private int age;
 
     @Column
-    private String Address;
+    private String address;
 
     @Column
-    private String Phone;
+    private String phone;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-    private LocalDate DOB;
-
-
+    private LocalDate dob;
 
 }
