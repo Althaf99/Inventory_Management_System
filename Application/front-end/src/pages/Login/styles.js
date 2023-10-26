@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center", // Center the content vertically
-    height: "70vh", // Adjust the height to center the content in the viewport
+    height: "100vh", // Adjust the height to center the content in the viewport
     padding: theme.spacing(2),
   },
   heading: {
@@ -23,13 +23,11 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     "& .MuiTextField-root": {
       margin: theme.spacing(1),
-      width: "500px",
+      width: "300px",
       border: `1px solid ${theme.palette.primary.main}`,
     },
     "& .MuiButton-root": {
       margin: theme.spacing(2),
-      marginTop: "40px",
-      width: "500px",
     },
   },
   infoBox: {

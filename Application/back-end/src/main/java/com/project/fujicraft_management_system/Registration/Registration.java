@@ -22,7 +22,7 @@ public class Registration {
     private String userName;
 
     @Column
-    private int password;
+    private String password;
 
     @Column
     private String firstName;

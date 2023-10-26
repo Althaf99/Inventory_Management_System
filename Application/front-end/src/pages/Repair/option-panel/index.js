@@ -7,7 +7,18 @@ import DeleteIcon from "../../../components/DeleteIcon";
 
 import { styles } from "../list-repair/styles";
 
-const OptionPanel = ({ values }) => {
+import useDeleteRepair from "../../../hooks/services/useDeleteRepair";
+
+const OptionPanel = ({ values, setIsUpdated, isUpdated }) => {
+  const { mutateAsync: repairDeleter } = useDeleteRepair({
+    id: values.id,
+  });
+
+  const handleDelete = () => {
+    repairDeleter();
+    setIsUpdated(!isUpdated);
+  };
+
   const classes = styles();
   return (
     <Grid>
@@ -37,6 +48,7 @@ const OptionPanel = ({ values }) => {
           variant="text"
           onClick={(e) => {
             e.stopPropagation();
+            handleDelete();
           }}
           classes={classes.deleteBtn}
           startIcon={<DeleteIcon className={classes.menuIconRoot} />}

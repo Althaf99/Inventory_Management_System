@@ -5,21 +5,22 @@ import NoteAddTwoToneIcon from "@mui/icons-material/NoteAddTwoTone";
 
 import PageLayout from "../../../components/PageLayout";
 import LazyLoadingTable from "../../../components/LazyLoadingTable";
-import ManageEmployee from "../manage-repair";
+
+import ManageStock from "../manage-stock";
 
 import OptionPanel from "../option-panel";
 
 import { styles } from "./styles";
 
-import useGetRepair from "../../../hooks/services/useGetRepair";
+import useGetStock from "../../../hooks/services/useGetStock";
 
-const ListRepair = () => {
+const ListStock = () => {
   const classes = styles();
 
   const [openCreateRepair, setOpenCreateRepair] = useState(false);
   const [isUpdated, setIsUpdated] = useState();
 
-  const { data: repairData } = useGetRepair(isUpdated);
+  const { data: stockData } = useGetStock(isUpdated);
 
   const handleCreateRepair = () => {
     setOpenCreateRepair(true);
@@ -31,26 +32,26 @@ const ListRepair = () => {
       accessor: "id",
     },
     {
-      Header: "Category",
-      accessor: "category",
+      Header: "ItemName",
+      accessor: "itemName",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
     {
-      Header: "Description",
-      accessor: "description",
+      Header: "Quantity",
+      accessor: "quantity",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
     {
-      Header: "Status",
-      accessor: "status",
+      Header: "Unit Cost",
+      accessor: "unitCost",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
     {
-      Header: "Date",
-      accessor: "date",
+      Header: "Supplier",
+      accessor: "supplier",
       headerStyles: { textAlign: "center" },
       cellStyles: { textAlign: "center" },
     },
@@ -78,7 +79,7 @@ const ListRepair = () => {
   return (
     <Grid item container classes={{ container: classes.gridContainer }}>
       <PageLayout
-        pageHeading={"Repair"}
+        pageHeading={"Stock"}
         pageActions={
           <Grid>
             <Button
@@ -87,16 +88,16 @@ const ListRepair = () => {
               onClick={handleCreateRepair}
             >
               <NoteAddTwoToneIcon className={classes.plusIcon} />
-              {"Create Repair"}
+              {"Create Stock"}
             </Button>
           </Grid>
         }
       >
         <Grid item className={classes.section} xs={12}>
-          {repairData && (
+          {stockData && (
             <LazyLoadingTable
               columns={columns}
-              data={repairData}
+              data={stockData}
               hiddenColumns={["id"]}
               maxHeightInRows={10}
               onClickTableRow={(index, row) => {
@@ -107,8 +108,8 @@ const ListRepair = () => {
           )}
         </Grid>
       </PageLayout>
-      <ManageEmployee setOpen={setOpenCreateRepair} open={openCreateRepair} />
+      <ManageStock setOpen={setOpenCreateRepair} open={openCreateRepair} />
     </Grid>
   );
 };
-export default ListRepair;
+export default ListStock;

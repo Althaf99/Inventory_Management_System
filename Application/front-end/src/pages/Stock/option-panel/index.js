@@ -5,25 +5,20 @@ import { Grid, Button, Divider, Box } from "@mui/material";
 import EditIcon from "../../../components/EditIcon";
 import DeleteIcon from "../../../components/DeleteIcon";
 
-import { styles } from "../list-employee/styles";
+import { styles } from "../list-Stock/styles";
 
-import useDeleteEmployee from "../../../hooks/services/useDeleteEmployee";
+import useDeleteStock from "../../../hooks/services/useDeleteStock";
 
-const OptionPanel = ({
-  values,
-  setIsUpdate,
-  isUpdate,
-  setOpenCreateEmployee,
-  openCreateEmploye,
-}) => {
-  const { mutateAsync: templateDeleter } = useDeleteEmployee({
+const OptionPanel = ({ values, setIsUpdated, isUpdated }) => {
+  const { mutateAsync: stockDeleter } = useDeleteStock({
     id: values.id,
   });
 
-  const handleDeleteEmployee = async () => {
-    setIsUpdate(!isUpdate);
-    await templateDeleter();
+  const handleDelete = () => {
+    stockDeleter();
+    setIsUpdated(!isUpdated);
   };
+
   const classes = styles();
   return (
     <Grid>
@@ -38,7 +33,6 @@ const OptionPanel = ({
           id="btn-edit-credential"
           onClick={(e) => {
             e.stopPropagation();
-            setOpenCreateEmployee(true);
           }}
           variant="text"
           classes={classes.btnRoot}
@@ -54,7 +48,7 @@ const OptionPanel = ({
           variant="text"
           onClick={(e) => {
             e.stopPropagation();
-            handleDeleteEmployee(values);
+            handleDelete();
           }}
           classes={classes.deleteBtn}
           startIcon={<DeleteIcon className={classes.menuIconRoot} />}

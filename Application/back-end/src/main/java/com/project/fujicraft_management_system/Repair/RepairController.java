@@ -29,7 +29,7 @@ public class RepairController {
         return repairService.getRepair();
     }
 
-    @DeleteMapping("/repair")
+    @DeleteMapping("/repair/{id}")
     private ResponseEntity<Object> deleteRepair(@PathVariable("id") int id) {
         return repairService.deleteRepair(id);
     }

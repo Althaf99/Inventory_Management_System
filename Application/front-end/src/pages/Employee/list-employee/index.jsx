@@ -16,13 +16,11 @@ import useGetEmployee from "../../../hooks/services/useGetEmployee";
 
 const ListEmployee = () => {
   const classes = styles();
-  const navigate = useNavigate();
+  const [isUpdate, setIsUpdate] = useState(false);
 
   const [openCreateEmployee, setOpenCreateEmployee] = useState(false);
 
-  const { data: employeeData } = useGetEmployee();
-
-  console.log("employeeData", employeeData);
+  const { data: employeeData } = useGetEmployee(isUpdate);
 
   const handleCreateEmployee = () => {
     setOpenCreateEmployee(true);
@@ -81,7 +79,15 @@ const ListEmployee = () => {
           row: { values },
         },
       }) => {
-        return <OptionPanel values={values} />;
+        return (
+          <OptionPanel
+            values={values}
+            setIsUpdate={setIsUpdate}
+            isUpdate={isUpdate}
+            setOpenCreateEmployee={setOpenCreateEmployee}
+            openCreateEmployee={openCreateEmployee}
+          />
+        );
       },
     },
   ];

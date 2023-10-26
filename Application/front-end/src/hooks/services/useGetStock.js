@@ -1,11 +1,10 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-const useGetEmployee = (isUpdate) => {
-  console.log("isUpdate", isUpdate);
+const useGetStock = (isUpdated) => {
   const fetchRequest = async () => {
     try {
-      const data = await axios.get(`http://localhost:8080/employee`);
+      const data = await axios.get(`http://localhost:8080/stock`);
 
       return data.data;
     } catch (e) {
@@ -13,9 +12,9 @@ const useGetEmployee = (isUpdate) => {
     }
   };
 
-  return useQuery(["dataEmployee", isUpdate], fetchRequest, {
+  return useQuery(["stockData", isUpdated], fetchRequest, {
     refetchOnWindowFocus: false,
   });
 };
 
-export default useGetEmployee;
+export default useGetStock;

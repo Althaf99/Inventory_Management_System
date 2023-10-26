@@ -1,7 +1,7 @@
 import { useQuery } from "react-query";
 import axios from "axios";
 
-const useGetRepair = () => {
+const useGetRepair = (isUpdated) => {
   const fetchRequest = async () => {
     try {
       const data = await axios.get(`http://localhost:8080/repair`);
@@ -12,7 +12,7 @@ const useGetRepair = () => {
     }
   };
 
-  return useQuery(["repairData"], fetchRequest, {
+  return useQuery(["repairData", isUpdated], fetchRequest, {
     refetchOnWindowFocus: false,
   });
 };
